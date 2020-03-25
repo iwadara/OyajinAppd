@@ -66,10 +66,10 @@ BEGIN
     "P",            IDM_VIEW_PRIVATE,       VIRTKEY, CONTROL, NOINVERT
     "S",            IDM_FILE_WRITE,         VIRTKEY, CONTROL, NOINVERT
     "T",            IDM_VIEW_TODO,          VIRTKEY, CONTROL, NOINVERT
-    "T",            IDM_VIEW_TODO,          VIRTKEY, SHIFT, CONTROL, NOINVERT
     VK_DELETE,      IDM_EDIT_DELETE,        VIRTKEY, NOINVERT
     VK_RETURN,      IDM_EDIT_TODO,          VIRTKEY, CONTROL, NOINVERT
     VK_RETURN,      IDM_EDIT_ALT,           VIRTKEY, ALT, NOINVERT
+    VK_RETURN,      IDM_EDIT_ALT,           VIRTKEY, SHIFT, CONTROL, NOINVERT
     VK_RETURN,      IDM_EDIT_FULL,          VIRTKEY, SHIFT, NOINVERT
     "W",            IDM_VIEW_WEEK,          VIRTKEY, CONTROL, NOINVERT
     "Y",            IDM_FILE_INSERT,        VIRTKEY, CONTROL, NOINVERT
@@ -369,15 +369,15 @@ BEGIN
     GROUPBOX        "ESCâüâ∫éûÇÃèàóù",IDC_STATIC,2,92,131,23,WS_GROUP
 END
 
-IDD_ABOUTDLG DIALOG  0, 0, 135, 125
+IDD_ABOUTDLG DIALOG  0, 0, 135, 91
 STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION
 CAPTION "About"
 FONT 14, "System"
 BEGIN
-    CTEXT           "",IDC_VERSION,13,85,112,18,SS_CENTERIMAGE
-    CTEXT           "Oyajin Appointment Ver 0.99f\nCopyright(C)1998 Shinichi Nakamoto",IDC_STATIC,4,26,127,18
-    CTEXT           "Oyajin Appointment Ver 0.99f-u01\n2001 Modified by äCêl",IDC_STATIC,8,56,120,18
-    ICON            IDI_ICON1,IDC_STATIC,7,5,16,14
+    CTEXT           "",IDC_VERSION,13,68,112,18,SS_CENTERIMAGE
+    CTEXT           "Oyajin Appointment Ver 0.99f\nCopyright(C)1998 Shinichi Nakamoto",IDC_STATIC,4,23,127,18
+    CTEXT           "Oyajin Appointment Ver 0.99f-u01\n2001 Modified by äCêl",IDC_STATIC,8,46,120,18
+    ICON            IDI_ICON1,IDC_STATIC,7,3,16,14
 END
 
 IDD_JUMPDLG DIALOG  0, 0, 131, 55
@@ -729,7 +729,7 @@ BEGIN
     BEGIN
         LEFTMARGIN, 7
         TOPMARGIN, 7
-        BOTTOMMARGIN, 118
+        BOTTOMMARGIN, 122
     END
 
     IDD_ABOUTDLG, DIALOG
@@ -737,7 +737,7 @@ BEGIN
         LEFTMARGIN, 3
         RIGHTMARGIN, 134
         TOPMARGIN, 3
-        BOTTOMMARGIN, 118
+        BOTTOMMARGIN, 87
     END
 
     IDD_JUMPDLG, DIALOG

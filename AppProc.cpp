@@ -384,7 +384,7 @@ SHRGINFO RGesture;	// [iwad] タップ&ホールドメニュー用
 //	Exit Menu
 		case IDM_FILE_EXIT:
 			SendMessage(hWnd, WM_CLOSE, 0, 0);
-			break ;
+			break;
 //	Edit Cut
 		case IDM_EDIT_CUT:
 			SendMessage(hWnd, WM_CHAR, TEXT('\030'), 0);	// Ctrl+X

@@ -60,6 +60,7 @@ BOOL SettingSheet(void)
 {
 PROPSHEETPAGE	Page[10];	// [iwad] [9]Å®[10] AboutÇí«â¡
 PROPSHEETHEADER	PageHeader;
+
 //	Clear Memory
 	memset(&Page, 0, sizeof(Page));
 	memset(&PageHeader, 0, sizeof(PageHeader));
@@ -121,7 +122,8 @@ PROPSHEETHEADER	PageHeader;
 	PageHeader.hwndParent = hMainWnd;
 	PageHeader.nPages = countof(Page);
 	PageHeader.ppsp = Page;
-	PageHeader.dwFlags = PSH_PROPSHEETPAGE | PSH_NOAPPLYNOW;
+	// PageHeader.dwFlags = PSH_PROPSHEETPAGE | PSH_NOAPPLYNOW;
+	PageHeader.dwFlags = PSH_PROPSHEETPAGE | PSH_NOAPPLYNOW | PSH_MAXIMIZE;	// [iwad] ÉIÉvÉVÉáÉìâÊñ ÇÃägí£
 //
 	return PropertySheet(&PageHeader);
 }
