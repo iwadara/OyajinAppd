@@ -1333,7 +1333,7 @@ DWORD	BarPtr, Time;
 		if(HIWORD(lParam) < dwSmallFontHight * 8 + dwWinTop)
 		{
 			Page = 0;
-			if(HIWORD(lParam) <= dwSmallFontHight * 3 + dwWinTop + 5)
+			if(HIWORD(lParam) <= dwSmallFontHight * 2 + dwWinTop)
 			{
 				if(dwYear == 1951 && dwMonth == 1)
 					return;
