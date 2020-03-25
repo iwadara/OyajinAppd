@@ -51,6 +51,8 @@ void	AlarmExec(HWND);
 BOOL	FindRecord(DWORD, FILEWORKS *);
 static void	SetupFont(HDC);
 static void GetSystemFont(void);
+static void SetInputMode(int Mode);	// [iwad]
+static DWORD GetInputMode(void);	// [iwad]
 BOOL	DelRecord(BOOL);
 BOOL	AddRecord(BOOL, BOOL);
 void	RestoreFocus(void);
@@ -93,6 +95,19 @@ void	SyncClear();
 #define	MIDSIZE		1 / 18
 #define	BIGSIZE		1 / 12
 //
+//	[iwad] InputMode
+//
+#define	INPUTMODE_ZEN_HIRAGANA	(0)
+#define	INPUTMODE_ZEN_KATAKANA	(1)
+#define	INPUTMODE_HAN_KATAKANA	(2)
+#define	INPUTMODE_ZEN_ALPHA_L	(3)
+#define	INPUTMODE_ZEN_ALPHA_S	(4)
+#define	INPUTMODE_HAN_ALPHA_L	(5)
+#define	INPUTMODE_HAN_ALPHA_S	(6)
+#define	INPUTMODE_HAN_NUMERIC	(7)
+// [iwad] ※W-ZERO3専用のレジストリ
+#define REG_KEY_PHONESTAT		_T("Software\\Sharp\\PhoneStatus")
+//
 //	Main Window Proc
 //
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -101,6 +116,7 @@ PAINTSTRUCT	Pst;
 HDC	hDC;
 TCHAR	FileName[MAX_PATH];
 static	DWORD	TimerCount;
+static	DWORD	dwInputMode = INPUTMODE_ZEN_HIRAGANA;	// [iwad] 入力モード(初期値: 全角かな)
 BOOL	DeleteMode;
 DWORD	DlgResult;
 SHRGINFO RGesture;	// [iwad] タップ&ホールドメニュー用
@@ -232,6 +248,7 @@ SHRGINFO RGesture;	// [iwad] タップ&ホールドメニュー用
 //	Left Button
 	case WM_LBUTTONDOWN:
 		MainLButtonProc(hWnd, hMemDC, wParam, lParam);
+
 		// [iwad] タップ&ホールドメニュー表示 ここから
 		RGesture.dwFlags = SHRG_RETURNCMD;
 		RGesture.cbSize  = sizeof(SHRGINFO);
@@ -778,6 +795,24 @@ HideScreen:
 		else
 			DialogBox(hInst, MAKEINTRESOURCE(IDD_ALARMDLG), hWnd, (DLGPROC )AlarmDlgProc) ;
 		break;
+// [iwad] ポップアップメニューオープン
+	case WM_ENTERMENULOOP:
+		// 入力モードを記憶して、半角数字以外の場合は入力モードを半角数字に書き換え
+		dwInputMode = GetInputMode();
+		if ( dwInputMode != INPUTMODE_HAN_NUMERIC ) {
+			// [iwad] メニューを開いた時の入力モードを自動的に数字キーに変更するように(W-ZERO3限定)
+			SetInputMode(INPUTMODE_HAN_NUMERIC);
+		}
+		break;
+// [iwad] ポップアップメニュークローズ
+	case WM_EXITMENULOOP:
+		// 記憶している入力モードが半角数字以外で、現在が半角数字の場合は元に戻す
+		if ( INPUTMODE_HAN_NUMERIC != dwInputMode ) {
+			if ( INPUTMODE_HAN_NUMERIC == GetInputMode() ) {
+				SetInputMode(dwInputMode);
+			}
+		}
+		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
@@ -930,3 +965,38 @@ LOGFONT	LogFont;	// Font Metrics
 	_tcscpy(LogFont.lfFaceName, TEXT("System"));// Set System Font Name
 	hSystemFont = CreateFontIndirect(&LogFont);// Get Font Object
 }
+//
+//	[iwad] 入力モードのセット
+//
+static void SetInputMode(int Mode)
+{
+	HKEY hKeyPs;
+	DWORD dwValue;
+
+	if (RegOpenKeyEx(HKEY_CURRENT_USER, REG_KEY_PHONESTAT, 0, KEY_ALL_ACCESS, &hKeyPs) == ERROR_SUCCESS)
+	{
+		dwValue = Mode;
+		RegSetValueEx(hKeyPs, _T("Status22"), 0, REG_DWORD, (LPBYTE)&dwValue, sizeof(DWORD));
+		RegCloseKey(hKeyPs);
+	}
+}
+//
+//	[iwad] 入力モードの取得
+//
+static DWORD GetInputMode(void)
+{
+	HKEY hKeyPs;
+	DWORD dwSize, dwValue;
+
+	if (RegOpenKeyEx(HKEY_CURRENT_USER, REG_KEY_PHONESTAT, 0, KEY_ALL_ACCESS, &hKeyPs) == ERROR_SUCCESS)
+	{
+		dwSize = sizeof(DWORD);
+		dwValue = 0;
+		if (RegQueryValueEx(hKeyPs, _T("Status22"), NULL, NULL, (LPBYTE)&dwValue, &dwSize) != ERROR_SUCCESS)
+			dwValue = INPUTMODE_HAN_NUMERIC;	//ERROR
+		RegCloseKey(hKeyPs);
+		return dwValue;
+	}
+	return INPUTMODE_HAN_NUMERIC;	//ERROR
+}
+

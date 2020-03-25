@@ -336,7 +336,7 @@ BOOL SetMenuBar(UINT iRes)
 		HMENU hMenu;	// [iwad] スクリプトメニュー用
 
 		hMenu = (HMENU)SendMessage(hTB, SHCMBM_GETSUBMENU, 0, IDM_BUTTON2);
-		InsertMenu(hMenu, 3, MF_BYPOSITION, IDM_FILE_ADDIN, L"拡張ﾒﾆｭｰ(&N)" ); 
+		InsertMenu(hMenu, 3, MF_BYPOSITION, IDM_FILE_ADDIN, L"&4 拡張ﾒﾆｭｰ" ); 
 		DrawMenuBar(hTB);
 	}
 
