@@ -1,7 +1,7 @@
-› ‰¡‰æ–Ê
+â—‹ æ¨ªç”»é¢
 dwXsize: 480
 dwYsize: 540
 
-› ‰¡‰æ–Ê
+â—‹ ç¸¦ç”»é¢
 dwXsize: 640
 dwYsize: 380
