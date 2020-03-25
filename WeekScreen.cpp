@@ -137,7 +137,8 @@ DWORD	TempIndex;	// Temp Array Index
 	if(dwWeekFloat == 0)	// Hide Year & Month if Float Mode
 	{
 		PatBlt(hDC, 0, 0, WeekBoxWidth, dwMidFontHight + 1, PATCOPY);
-		txRect.top = 0;
+		// [iwad] txRect.top = 0;
+		txRect.top = 5;
 		txRect.bottom = dwMidFontHight;
 		txRect.left = 0;
 		txRect.right = txRect.left + WeekBoxWidth - 1;
@@ -156,14 +157,17 @@ DWORD	TempIndex;	// Temp Array Index
 	{
 		LinePoint[0].x = 0;	// Left Edge
 		LinePoint[1].x = WeekBoxWidth * 8 - 1;	// Set Right Edge
-		LinePoint[0].y = LinePoint[1].y = WeekBoxHight;
+		// [iwad] LinePoint[0].y = LinePoint[1].y = WeekBoxHight;
+		LinePoint[0].y = LinePoint[1].y = WeekBoxHight + 5;
 		Polyline(hDC, LinePoint, 2);	// Draw Top Horizontal Line
-		LinePoint[0].y = LinePoint[1].y = WeekBoxHight * WeekLineCount + 1;
+		// [iwad] LinePoint[0].y = LinePoint[1].y = WeekBoxHight * WeekLineCount + 1;
+		LinePoint[0].y = LinePoint[1].y = WeekBoxHight * WeekLineCount + 6;
 		LinePoint[1].x++;	// Inc Right Edge
 		Polyline(hDC, LinePoint, 2);	// Draw Bottom Horizontal Line
 //	Draw Day Name & Virtical Lines
 		LinePoint[0].y = 0;	// 1st Line
-		LinePoint[1].y = WeekBoxHight * WeekLineCount + 1;	// 1st Line
+		// [iwad] LinePoint[1].y = WeekBoxHight * WeekLineCount + 1;
+		LinePoint[1].y = WeekBoxHight * WeekLineCount + 6;	// 1st Line
 		for(i = 0; i < 8; i++)	// Repeat for Sun to Sat
 		{	// Check is it Today?
 			if(WeekBuf[i][0] == dwTodayYear && WeekBuf[i][1] == dwTodayMonth && WeekBuf[i][2] == dwTodayDay)
@@ -198,8 +202,10 @@ DWORD	TempIndex;	// Temp Array Index
 				txRect.right = txRect.left + WeekBoxWidth - 1;// Single Space
 			}
 //	Draw Day of the Week & Date
-			txRect.top = 0;
-			txRect.bottom = dwMidFontHight;
+			// [iwad] txRect.top = 0;
+			txRect.top = 5;
+			// [iwad] txRect.bottom = dwMidFontHight;
+			txRect.bottom = dwMidFontHight + 5;
 			if(dwWeekFloat && i == dwCurX)
 			{
 				if(dwDateFormat)// US Format?
@@ -246,7 +252,8 @@ DWORD	TempIndex;	// Temp Array Index
 		#endif
 
 			if(dwPrivate && dwWeekFloat && i == dwCurX)
-				PatBlt(hDC, txRect.left, 0, WeekBoxWidth * 2, dwMidFontHight + 1, PATINVERT);
+				// [iwad] プライベート反転表示 PatBlt(hDC, txRect.left, 0, WeekBoxWidth * 2, dwMidFontHight + 1, PATINVERT);
+				PatBlt(hDC, txRect.left, 4, WeekBoxWidth * 2, dwMidFontHight + 2, PATINVERT);
 		}
 	}
 //	Draw Appointments
@@ -293,7 +300,8 @@ DispAgain:
 //	Draw Title of the Record
 					txRect.left = LineLeft;
 					txRect.right = txRect.left + WeekBoxWidth - 1;
-					txRect.top = (j + 1) * WeekBoxHight + 1;
+					// [iwad] txRect.top = (j + 1) * WeekBoxHight + 1;
+					txRect.top = (j + 1) * WeekBoxHight + 6;
 					txRect.bottom = txRect.top + dwMidFontHight;
 					DrawText(hDC, DayTitle[i][k], -1, &txRect, DT_LEFT | DT_VCENTER | DT_NOPREFIX);
 					WeekGenIDBuf[i][j] = DayGenID[i][k];	// Clear Current Line Seek Ptr
@@ -312,10 +320,13 @@ DispAgain:
 				DWORD	AllIndex = j + WeekAllStartIndex[i];
 					txRect.left = LineLeft;
 					txRect.right = txRect.left + WeekBoxWidth - 1;
-					txRect.top = (j + 1) * WeekBoxHight + 1,
+					// [iwad] txRect.top = (j + 1) * WeekBoxHight + 1,
+					txRect.top = (j + 1) * WeekBoxHight + 6,
 					txRect.bottom = txRect.top + dwMidFontHight;
 					if(DayGenID[i][AllIndex] && AllIndex < DayAllNum[i])
 					{
+						DWORD	BkColorBuf = 0xCCCC66;	// [iwad] 全日表示はカラー背景(色:ナイルブルー)
+
 						_tcscpy(TempStr, TEXT(""));
 						if(
 						(dwTopWeekLine < DayAllNum[i])
@@ -327,7 +338,11 @@ DispAgain:
 						)
 							_tcscat(TempStr, TEXT("..."));	// Continue Mark
 						_tcscat(TempStr, DayTitle[i][AllIndex]);
+						// [iwad] 全日表示はカラー背景
+						BkColorBuf = SetBkColor(hDC, BkColorBuf);
 						DrawText(hDC, TempStr, -1, &txRect, DT_LEFT | DT_VCENTER | DT_NOPREFIX);
+						SetBkColor(hDC, BkColorBuf);
+						//DrawText(hDC, TempStr, -1, &txRect, DT_LEFT | DT_VCENTER | DT_NOPREFIX);
 						WeekGenIDBuf[i][j] = DayGenID[i][AllIndex];	// Clear Current Line Seek Ptr
 						WeekAllDayBuf[i][j] = DayAllDay[i][AllIndex];	// Save Original AllDay Flag
 						WeekTimeBuf[i][j] = DayStartTime[i][AllIndex];
@@ -347,7 +362,8 @@ DispAgain:
 //	Draw Title of the Reecord
 					txRect.left = LineLeft;
 					txRect.right = txRect.left + WeekBoxWidth - 1;
-					txRect.top = (j + dwTopWeekLine + 1) * WeekBoxHight + 1;
+					// [iwad] txRect.top = (j + dwTopWeekLine + 1) * WeekBoxHight + 1;
+					txRect.top = (j + dwTopWeekLine + 1) * WeekBoxHight + 6;
 					txRect.bottom = txRect.top + dwMidFontHight;
 					if(DayGenID[i][TempIndex])
 						DrawText(hDC, DayTitle[i][TempIndex], -1, &txRect, DT_LEFT | DT_VCENTER | DT_NOPREFIX);
@@ -362,7 +378,8 @@ ReWrite:
 					WeekStartIndex[i]--;
 					PatBlt(hDC,		// Clear Only Schedule Part
 						LineLeft,
-						WeekBoxHight + 1,
+						// [iwad] WeekBoxHight + 1,
+						WeekBoxHight + 6,
 						WeekBoxWidth - 1,
 						WeekBoxHight * (WeekLineCount - 1), PATCOPY);
 						dwOldWeekCurX = 8;
@@ -376,7 +393,8 @@ ReWrite:
 	if(DayStartTime[dwCurX][DayAllNum[dwCurX] + WeekStartIndex[dwCurX]] >= GetTime(13, 0) && dwAppDispMode == 0)
 		APMode = 2;			// PM Char
 //	Clear Time Line
-	PatBlt(hDC, TimeLeft, WeekBoxHight + 1, WeekBoxWidth - 1, WeekBoxHight * (WeekLineCount - 1), PATCOPY);// Clear Memory Device
+	// [iwad] PatBlt(hDC, TimeLeft, WeekBoxHight + 1, WeekBoxWidth - 1, WeekBoxHight * (WeekLineCount - 1), PATCOPY);
+	PatBlt(hDC, TimeLeft, WeekBoxHight + 6, WeekBoxWidth - 1, WeekBoxHight * (WeekLineCount - 1), PATCOPY);// Clear Memory Device
 	if(dwAppDispMode)	// Hide Mode?
 	{
 		i = 0;
@@ -395,6 +413,7 @@ ReWrite:
 			DispHour /= 64;
 			if(DayAllDay[dwCurX][j])
 			{
+
 				if(dwHourMode)	// 24H Mode?
 				{
 					wsprintf(TempStr, TEXT("%2d:%2.2d"), DispHour, DispMin);
@@ -408,7 +427,8 @@ ReWrite:
 					else
 						wsprintf(TempStr, TEXT("%2d:%2.2d"), DispHour, DispMin);
 				}
-				txRect.top = (i + 1) * WeekBoxHight + 1;
+				// [iwad] txRect.top = (i + 1) * WeekBoxHight + 1;
+				txRect.top = (i + 1) * WeekBoxHight + 6;
 				txRect.bottom = txRect.top + dwMidFontHight;
 				if(dwWeekFloat)
 					txRect.left = dwCurX * WeekBoxWidth;
@@ -464,7 +484,8 @@ ReWrite:
 				else
 					wsprintf(TempStr, TEXT("%2d:%2.2d"), DispHour, DispMin);
 			}
-			txRect.top = (i + dwTopWeekLine + 1) * WeekBoxHight + 1;
+			// [iwad] txRect.top = (i + dwTopWeekLine + 1) * WeekBoxHight + 1;
+			txRect.top = (i + dwTopWeekLine + 1) * WeekBoxHight + 6;
 			txRect.bottom = txRect.top + dwMidFontHight;
 			if(dwWeekFloat)
 				txRect.left = dwCurX * WeekBoxWidth;
@@ -590,7 +611,8 @@ void ReverseWeekBox(HDC hDC,DWORD x, DWORD y)
 {
 	PatBlt(hDC,
 			(x + 1) * WeekBoxWidth + 1,
-			(y + 1) * WeekBoxHight + 1,
+			// [iwad] (y + 1) * WeekBoxHight + 1,
+			(y + 1) * WeekBoxHight + 6,
 			WeekBoxWidth - 1,
 			WeekBoxHight - 1, PATINVERT);
 }

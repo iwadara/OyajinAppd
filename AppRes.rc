@@ -577,6 +577,11 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "削除(&D)\tDel",                 IDM_EDIT_DELETE
     END
+    POPUP "オプション用"
+    BEGIN
+        MENUITEM "OK",                          IDOK
+        MENUITEM "キャンセル",                       IDCANCEL
+    END
     POPUP "保留メニュー"
     BEGIN
         MENUITEM "ﾒﾆｭｰを隠す(&N)\tCtrl+N",         IDM_VIEW_MINIMIZE
@@ -800,6 +805,12 @@ BEGIN
     0xfffe, 0x800b, 0x0004, 0x0018, 0x0085, 0x0000, 0x0001
 END
 
+IDR_MENUBAR2 RCDATA 
+BEGIN
+    0x0190, 0x0002, 0xfffe, 0x0001, 0x0004, 0x0010, 0x0086, 0x0000, 0xffff, 
+    0xfffe, 0x0002, 0x0004, 0x0010, 0x0087, 0x0000, 0xffff
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -810,6 +821,8 @@ STRINGTABLE
 BEGIN
     IDS_LEFTBUTTON          "表示"
     IDS_RIGHTBUTTON         "メニュー"
+    IDS_OK                  " "
+    IDS_CANCEL              " "
 END
 
 #endif    // 日本語 resources

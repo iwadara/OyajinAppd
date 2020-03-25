@@ -112,14 +112,18 @@ DWORD	CurrentPage;
 	LineHight = dwSmallFontHight;	// Get LineBox Height
 	LineWidth = FrameWidth - 2;// Get LineBox Width
 //	Draw Day Frame
-	DrawFrame(hDC, 0, 0, FrameWidth, LineHight * (DayLineCount + 1) + 2);
+	// [iwad] DrawFrame(hDC, 0, 0, FrameWidth, LineHight * (DayLineCount + 1) + 2);
+	DrawFrame(hDC, 0, 0, FrameWidth, LineHight * (DayLineCount + 1) + 7);
 	SelectObject(hDC, hSmallFont);
 	LinePoint[0].x = 0;				// Frame Left Top Axis
 	LinePoint[1].x = FrameWidth;	// Frame Left Top Axis
-	LinePoint[0].y = LinePoint[1].y = dwSmallFontHight;
+	// [iwad] LinePoint[0].y = LinePoint[1].y = dwSmallFontHight;
+	LinePoint[0].y = LinePoint[1].y = dwSmallFontHight + 5;	// 日付表示の下のライン位置
 	Polyline(hDC, LinePoint, 2);	// Draw Todays Line
-	txRect.top = 1;
-	txRect.bottom = dwSmallFontHight ;
+	// [iwad] txRect.top = 1;
+	txRect.top = 6;
+	// [iwad] txRect.bottom = dwSmallFontHight;
+	txRect.bottom = dwSmallFontHight + 5;
 	txRect.left = 1;
 	txRect.right = FrameWidth - 2;
 	CurrentPage = dwCurY / 6;
@@ -137,7 +141,8 @@ DWORD	CurrentPage;
 		ShortDayName[GetCurrentWeekDay()]);
 	DrawText(hDC, TempStr, -1, &txRect, DT_CENTER | DT_VCENTER);
 	if(dwPrivate)
-		PatBlt(hDC, 1, 1, FrameWidth - 1, dwSmallFontHight, PATINVERT);
+		// [iwad] PatBlt(hDC, 1, 1, FrameWidth - 1, dwSmallFontHight, PATINVERT);
+		PatBlt(hDC, 1, 1, FrameWidth - 1, dwSmallFontHight + 5, PATINVERT);
 	if(DrawCal)
 	{
 //	Draw Calender TEXT
@@ -159,7 +164,8 @@ DWORD	CurrentPage;
 					continue;
 				txRect.left =
 					((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
-				txRect.top = ((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight;
+				// [iwad] txRect.top = ((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight;
+				txRect.top = ((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight + 5;
 				txRect.bottom = txRect.top + dwSmallFontHight;
 				txRect.right = txRect.left + dwSmallFontWidth * 5 / 2;
 				if(MonthBuf[k][i][2] < 10)
@@ -206,8 +212,8 @@ DWORD	CurrentPage;
 						((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
 					LinePoint[1].x = 
 						LinePoint[0].x + dwSmallFontWidth * 2; 
-					LinePoint[0].y = LinePoint[1].y = 
-						((j / 3) * 8 + i / 7 + 3) * dwSmallFontHight - 1;
+					// [iwad] LinePoint[0].y = LinePoint[1].y = ((j / 3) * 8 + i / 7 + 3) * dwSmallFontHight - 1;
+					LinePoint[0].y = LinePoint[1].y = ((j / 3) * 8 + i / 7 + 3) * dwSmallFontHight + 4;
 					Polyline(hDC, LinePoint, 2);	// Draw Todays Line
 				}
 				if(MonthBuf[k][i][0] == dwTodayYear
@@ -215,12 +221,14 @@ DWORD	CurrentPage;
 				&& MonthBuf[k][i][2] == dwTodayDay)
 				DrawFrame(hDC,
 					((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth - 1,
-					((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight,
+					// [iwad] ((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight,
+					((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight + 5,
 					dwSmallFontWidth * 5 / 2,
 					dwSmallFontHight - 1);
 			}
-//	Draw Day Indicator
-			txRect.top = ((j / 3) * 8 + 1) * dwSmallFontHight;
+//	Draw Day Indicator (曜日表示)
+			// [iwad] txRect.top = ((j / 3) * 8 + 1) * dwSmallFontHight;
+			txRect.top = ((j / 3) * 8 + 1) * dwSmallFontHight + 5;
 			txRect.bottom = txRect.top + dwSmallFontHight;
 
 		// [iwad] 土日カラー対応
@@ -262,7 +270,8 @@ DWORD	CurrentPage;
 			}
 		#endif
 //	Draw Month and Year
-			txRect.top = (j / 3) * dwSmallFontHight * 8;
+			// [iwad] txRect.top = (j / 3) * dwSmallFontHight * 8;
+			txRect.top = (j / 3) * dwSmallFontHight * 8 + 5;
 			txRect.bottom = txRect.top + dwSmallFontHight;
 			txRect.left = ((j % 3) * 22 + 1) * dwSmallFontWidth + FrameWidth;
 			txRect.right = txRect.left + 21 * dwSmallFontWidth;
@@ -274,14 +283,16 @@ DWORD	CurrentPage;
 //	Draw Frame
 			DrawFrame(hDC,
 				(j % 3) * 22 * dwSmallFontWidth + FrameWidth + dwSmallFontWidth / 4,	// Frame Left Top Axis
-				(j / 3) * dwSmallFontHight * 8,
+				// [iwad] (j / 3) * dwSmallFontHight * 8,
+				(j / 3) * dwSmallFontHight * 8 + 5,
 				dwSmallFontWidth * 21 + dwSmallFontWidth / 2,
 				dwSmallFontHight * 8);
 		}
 		if(dwToDoHalf)	// ToDo on Day Screen?
 			DrawToDo(hDC,
 				(j % 3) * 22 * dwSmallFontWidth + FrameWidth + dwSmallFontWidth / 4,	// Frame Left Top Axis
-				(j / 3) * dwSmallFontHight * 8,
+				// [iwad] (j / 3) * dwSmallFontHight * 8,
+				(j / 3) * dwSmallFontHight * 8 + 5,
 				dwSmallFontWidth * 21 + dwSmallFontWidth / 2,
 				dwSmallFontHight * 8);
 		dwOldCurX = 7;
@@ -317,10 +328,13 @@ DispAgain:
 //	Draw Title of the Record
 			txRect.left = dwSmallFontWidth * 8 + 1;
 			txRect.right = FrameWidth - 1;
-			txRect.top = (i + 1) * LineHight + 1;
+			// [iwad] txRect.top = (i + 1) * LineHight + 1;
+			txRect.top = (i + 1) * LineHight + 6;
 			txRect.bottom = txRect.top + LineHight;
 			if(DayGenID[0][i + AllStartIndex])
 			{
+				DWORD	BkColorBuf = 0xCCCC66;	// [iwad] 全日表示はカラー背景(色:ナイルブルー)
+
 				_tcscpy(TempStr, TEXT(""));
 				if(
 				(AllDayHight < DayAllNum[0])
@@ -333,7 +347,12 @@ DispAgain:
 				if(DayToDo[i + AllStartIndex])
 					_tcscat(TempStr, TEXT("!"));
 				_tcscat(TempStr, DayTitle[0][i + AllStartIndex]);
+
+				// [iwad] 全日表示はカラー背景
+				BkColorBuf = SetBkColor(hDC, BkColorBuf);
 				DrawText(hDC, TempStr, -1, &txRect, DT_LEFT | DT_VCENTER | DT_NOPREFIX);
+				SetBkColor(hDC, BkColorBuf);
+				//DrawText(hDC, TempStr, -1, &txRect, DT_LEFT | DT_VCENTER | DT_NOPREFIX);
 			}
 			DayOrgIDBuf[i] = DayGenID[0][i + AllStartIndex];	// Clear Current Line Seek Ptr
 			DayOrgAllDayBuf[i] = DayAllDay[0][i + AllStartIndex];	// Save Original AllDay Flag
@@ -379,7 +398,8 @@ DispAgain:
 					else
 						wsprintf(TimeStr, TEXT("%2d:%2.2d"), DispHour, DispMin);
 				}
-				txRect.top = LineHight * (i + 1) + 1;
+				// [iwad] txRect.top = LineHight * (i + 1) + 1;
+				txRect.top = LineHight * (i + 1) + 6;
 				txRect.bottom = txRect.top + LineHight;
 				txRect.left = 1;
 				txRect.right = txRect.left + 6 * dwSmallFontWidth;
@@ -398,10 +418,11 @@ DispAgain:
 					DrawText(hDC, &APMark[APMode], 1, &txRect, DT_LEFT | DT_VCENTER);
 				}
 			}
-//	Draw Title of the Reecord
+//	Draw Title of the Record
 			txRect.left = dwSmallFontWidth * 8 + 1;
 			txRect.right = FrameWidth - 1;
-			txRect.top = (i + 1) * LineHight + 1;
+			// [iwad] txRect.top = (i + 1) * LineHight + 1;
+			txRect.top = (i + 1) * LineHight + 6;
 			txRect.bottom = txRect.top + LineHight;
 			_tcscpy(TempStr, TEXT(""));
 			if(DayAlarm[j])
@@ -446,7 +467,8 @@ DispAgain:
 				else
 					wsprintf(TimeStr, TEXT("%2d:%2.2d"), DispHour, DispMin);
 			}
-			txRect.top = (i + 1) * LineHight + 1;
+			// [iwad] txRect.top = (i + 1) * LineHight + 1;
+			txRect.top = (i + 1) * LineHight + 6;
 			txRect.bottom = txRect.top + LineHight;
 			txRect.left = 1;
 			txRect.right = txRect.left + 6 * dwSmallFontWidth;
@@ -457,10 +479,11 @@ DispAgain:
 				txRect.right += 2 * dwBigFontWidth;
 				DrawText(hDC, &APMark[APMode], 1, &txRect, DT_LEFT | DT_VCENTER);
 			}
-//	Draw Title of the Reecord
+//	Draw Title of the Record
 			txRect.left = dwSmallFontWidth * 8 + 1;
 			txRect.right = FrameWidth - 1;
-			txRect.top = (i + 1) * LineHight + 1;
+			// [iwad] txRect.top = (i + 1) * LineHight + 1;
+			txRect.top = (i + 1) * LineHight + 6;
 			txRect.bottom = txRect.top + LineHight;
 			if(DayGenID[0][OneIndex])
 			{
@@ -489,7 +512,8 @@ ReWrite:
 			StartIndex--;
 			PatBlt(hDC,		// Clear Only Schedule Part
 				1,
-				LineHight + 1,
+				// [iwad] LineHight + 1,
+				LineHight + 6,
 				FrameWidth - 1,
 				LineHight * DayLineCount, PATCOPY);
 			goto DispAgain;
@@ -534,7 +558,8 @@ void ReverseHalfCalBox(HDC hDC, DWORD x, DWORD y)
 		y += 6;
 	PatBlt(hDC,
 			(((y / 6) % 3) * 22 + x * 3 + 1) * dwSmallFontWidth + FrameWidth - 1,
-			((y / 18) * 8 + (y % 6) + 2) * dwSmallFontHight,
+			// [iwad] ((y / 18) * 8 + (y % 6) + 2) * dwSmallFontHight,
+			((y / 18) * 8 + (y % 6) + 2) * dwSmallFontHight + 5,	// 月の日にち タップ時の反転表示位置
 			dwSmallFontWidth * 5 / 2 + 1,
 			dwSmallFontHight, PATINVERT);
 }
@@ -557,7 +582,8 @@ void ReverseHalfBox(HDC hDC, DWORD y)
 {
 	PatBlt(hDC,
 			1,
-			(y + 1) * LineHight + 1,
+			// [iwad] (y + 1) * LineHight + 1,	// 今日の予定 タップ時の反転表示位置
+			(y + 1) * LineHight + 6,
 			FrameWidth - 1,
 			dwSmallFontHight, PATINVERT);
 }

@@ -290,21 +290,21 @@ DWORD	dwGrayBUF;				// [iwad] 土日カラー対応 バッファ
 	WeekCurY = dwTopWeekLine;			// Set Week Screen Cursor Y
 	GetToday();
 	// [iwad] BoxHight = (dwYsize - dwSmallFontHight * 2) / 5;
-	BoxHight = (dwYsize - dwSmallFontHight * 2 - 2) / 5;	// Get DayBox Height
+	BoxHight = (dwYsize - dwSmallFontHight * 2) / 5 - 1;	// Get DayBox Height
 	BoxWidth = (dwXsize / dwWeekWidth);	// Get DayBox Width
 	DayHight = dwYsize - BoxHight * 5;
 	Lines = BoxHight / dwMidFontHight;	// Get Lines in the Box
 	if(Lines > 16)
 		Lines = 16;	// Max Disp Line = 16
 	// [iwad] LinePoint[0].y = dwSmallFontHight;
-	LinePoint[0].y = dwSmallFontHight + 2;	// 1st Line
+	LinePoint[0].y = dwSmallFontHight + 4;	// 1st Line
 	LinePoint[1].y = dwYsize - 1;	// 1st Line
 	DispYear = MonthBuf[0][15][0];	// Get Center Year
 	DispMonth = MonthBuf[0][15][1];	// Get Center Month
 	// [iwad] txRect.top = 0;
-	txRect.top = 3;
+	txRect.top = 4;
 	// [iwad] txRect.bottom = dwSmallFontHight;
-	txRect.bottom = dwSmallFontHight + 3;
+	txRect.bottom = dwSmallFontHight + 4;
 	txRect.left = 0;
 	txRect.right = BoxWidth * 7 + 1;
 	wsprintf(TempStr, TEXT("%s %d (%d / %d)"), 
@@ -312,9 +312,9 @@ DWORD	dwGrayBUF;				// [iwad] 土日カラー対応 バッファ
 	DrawText(hDC, TempStr, -1, &txRect, DT_CENTER | DT_VCENTER);
 	if(dwPrivate)
 		// [iwad] PatBlt(hDC, 0, 0, BoxWidth * 7 + 1, dwSmallFontHight, PATINVERT);
-		PatBlt(hDC, 0, 0, BoxWidth * 7 + 1, dwSmallFontHight + 2, PATINVERT);
+		PatBlt(hDC, 0, 0, BoxWidth * 7 + 1, dwSmallFontHight + 4, PATINVERT);
 	// [iwad] txRect.top = dwSmallFontHight;
-	txRect.top = dwSmallFontHight + 3;
+	txRect.top = dwSmallFontHight + 5;
 	txRect.bottom = DayHight;
 	for(i = 0; i < dwWeekWidth + 1; i++)	// Repeat for Row (Vertical line)
 	{
@@ -366,7 +366,7 @@ DWORD	dwGrayBUF;				// [iwad] 土日カラー対応 バッファ
 		Polyline(hDC, LinePoint, 2);	// Draw
 	}
 	// [iwad] LinePoint[0].y = dwSmallFontHight;
-	LinePoint[0].y = dwSmallFontHight + 2;	// 1st Line
+	LinePoint[0].y = dwSmallFontHight + 4;	// 1st Line
 	LinePoint[1].y = LinePoint[0].y;	// 1st Line
 	Polyline(hDC, LinePoint, 2);	// Draw Top Line
 	for(i = 0; i < 35; i++)	// Repeat

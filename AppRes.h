@@ -27,7 +27,11 @@
 #define IDS_LEFTBUTTON                  132
 #define IDS_RIGHTBUTTON                 133
 #define IDR_MENUBAR1                    134
+#define IDS_OK                          134
 #define IDR_MENUBAR2                    135
+#define IDS_STRING135                   135
+#define IDS_NO                          135
+#define IDS_CANCEL                      135
 #define IDM_MAIN_MENU                   400
 #define IDR_MENU2                       401
 #define IDC_VERSION                     1000
@@ -204,6 +208,7 @@
 #define IDM_FILE_WRITE                  40031
 #define IDM_FILE_INSERT                 40032
 #define IDM_FILE_SYNC                   40033
+#define ID                              40034
 
 // Next default values for new objects
 // 
@@ -211,7 +216,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        123
-#define _APS_NEXT_COMMAND_VALUE         40034
+#define _APS_NEXT_COMMAND_VALUE         40035
 #define _APS_NEXT_CONTROL_VALUE         1138
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

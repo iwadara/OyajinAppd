@@ -84,6 +84,7 @@ static BOOL	TestMonth(void);
 static BOOL	TestHalf(void);
 static BOOL	TestToDoView(void);
 static BOOL	TestJump(void);
+BOOL SetMenuBar(UINT);	// [iwad]
 //
 //	Definision
 //
@@ -314,10 +315,10 @@ BOOL SetMenuBar(UINT iRes)
 	SHMENUBARINFO sMenu;
 	memset(&sMenu, 0, sizeof(SHMENUBARINFO));
 	sMenu.cbSize = sizeof(SHMENUBARINFO);
-	sMenu.hwndParent =  hMainWnd;		// メニューバーを所有する(WM_COMMANDを処理する)ウィンドウのハンドル
+	sMenu.hwndParent = hMainWnd;	// メニューバーを所有する(WM_COMMANDを処理する)ウィンドウのハンドル
 	sMenu.dwFlags = 0;
 	sMenu.nToolBarId = iRes;
-	sMenu.hInstRes   = hInst;			// アプリケーションのインスタンスハンドル
+	sMenu.hInstRes = hInst;		// アプリケーションのインスタンスハンドル
 	sMenu.nBmpId = 0;
 	sMenu.cBmpImages = 0;
 

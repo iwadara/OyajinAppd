@@ -1580,11 +1580,23 @@
 			Filter="h;hpp;hxx;hm;inl"
 			>
 			<File
+				RelativePath=".\AlarmRes.h"
+				>
+			</File>
+			<File
 				RelativePath=".\AppRes.h"
 				>
 			</File>
 			<File
 				RelativePath=".\external.h"
+				>
+			</File>
+			<File
+				RelativePath=".\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Struct.h"
 				>
 			</File>
 		</Filter>

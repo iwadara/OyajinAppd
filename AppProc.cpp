@@ -580,8 +580,13 @@ JumpFullScreen:
 			break;			
 //	Set Option Settings
 		case IDM_VIEW_OPTION:
+			extern BOOL SetMenuBar(UINT);	// [iwad] extern宣言してしまっている → 要改善項目
 			if(FileLock)	// Can't Change BackGround Mode while it Works
 				break;
+
+			// [iwad] ソフトキーのセット(OK, cancel)
+			SetMenuBar(IDR_MENUBAR2);
+
 			if(SettingSheet())
 			{	// OK Button
 				if(dwToDoHalf && DispMode == 0 && (dwCurY) / 6 == 4)// Check Half Year ToDo
@@ -589,6 +594,9 @@ JumpFullScreen:
 				SetupFont(hMemDC);	// Setup Current Font
 				if(DispMode != 4)	// if Input Screen then Save Current Screen
 				{
+					// [iwad] ソフトキーを元に戻す
+					SetMenuBar(IDR_MENUBAR1);
+
 					SetupMainScreen(hMemDC);// Update Current Screen
 					InvalidateRect(hWnd, NULL, FALSE);// Show!
 				}

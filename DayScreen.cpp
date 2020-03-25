@@ -126,16 +126,18 @@ TCHAR	TempStr[256];// Title Buffer
 	LineWidth = FrameWidth * 3 / 4;		// Get LineBox Width
 //	Draw Today's Date in English
 //	Draw Day Frame
-	DrawFrame(hDC, 0, 0, FrameWidth, 4 + dwSmallFontHight + LineHight * DayLineCount);
+	// [iwad] DrawFrame(hDC, 0, 0, FrameWidth, 4 + dwSmallFontHight + LineHight * DayLineCount);
+	DrawFrame(hDC, 0, 0, FrameWidth, 4 + dwSmallFontHight + LineHight * DayLineCount + 5);
 	LinePoint[0].x = 0;				// Frame Left Top Axis
 	LinePoint[1].x = FrameWidth;	// Frame Left Top Axis
 	// [iwad] LinePoint[0].y = LinePoint[1].y = dwSmallFontHight;
-	LinePoint[0].y = LinePoint[1].y = dwSmallFontHight + 1;	// 日付表示の下のライン位置
+	LinePoint[0].y = LinePoint[1].y = dwSmallFontHight + 5;	// 日付表示の下のライン位置
 	Polyline(hDC, LinePoint, 2);	// Draw Todays Line
 	SelectObject(hDC, hSmallFont);		// Set Font (Small)
 	// [iwad] txRect.top = 1;
-	txRect.top = 3;
-	txRect.bottom = dwSmallFontHight;
+	txRect.top = 6;
+	// [iwad] txRect.bottom = dwSmallFontHight;
+	txRect.bottom = dwSmallFontHight + 5;
 	txRect.left = 1;
 	txRect.right = FrameWidth - 2;
 	if(dwDateFormat)
@@ -166,7 +168,8 @@ TCHAR	TempStr[256];// Title Buffer
 	txRect.left = txRect.right - dwSmallFontWidth * 9;
 	DrawText(hDC, TempStr, -1, &txRect, DT_RIGHT | DT_VCENTER);
 	if(dwPrivate)
-		PatBlt(hDC, 1, 1, FrameWidth - 1, dwSmallFontHight + 1, PATINVERT);
+		// [iwad] PatBlt(hDC, 1, 1, FrameWidth - 1, dwSmallFontHight + 1, PATINVERT);
+		PatBlt(hDC, 1, 1, FrameWidth - 1, dwSmallFontHight + 5, PATINVERT);
 	if(DrawCal)
 	{
 //	Draw Calender TEXT
@@ -184,7 +187,7 @@ TCHAR	TempStr[256];// Title Buffer
 				txRect.left =
 					((i % 7) * 4 + 1) * dwSmallFontWidth + FrameWidth;
 				// [iwad] txRect.top = (j * 8 + i / 7 + 2) * dwSmallFontHight;
-				txRect.top = (j * 8 + i / 7 + 3) * dwSmallFontHight;
+				txRect.top = (j * 8 + i / 7 + 2) * dwSmallFontHight + 5;
 				txRect.bottom = txRect.top + dwSmallFontHight;
 				txRect.right = txRect.left + dwSmallFontWidth * 3;
 				if(MonthBuf[j][i][2] < 10)
@@ -234,7 +237,7 @@ TCHAR	TempStr[256];// Title Buffer
 						- dwSmallFontWidth / 2;	// Frame Left Top Axis
 					LinePoint[0].y = LinePoint[1].y = 
 						// [iwad] (j * 8 + i / 7 + 3) * dwSmallFontHight - 1;
-						(j * 8 + i / 7 + 4) * dwSmallFontHight - 1;
+						(j * 8 + i / 7 + 3) * dwSmallFontHight + 4;
 					Polyline(hDC, LinePoint, 2);	// Draw Todays Line
 				}
 				if(MonthBuf[j][i][0] == dwTodayYear
@@ -243,13 +246,14 @@ TCHAR	TempStr[256];// Title Buffer
 				DrawFrame(hDC,
 					((i % 7) * 4 + 1) * dwSmallFontWidth + FrameWidth - 1,
 					// [iwad] (j * 8 + i / 7 + 2) * dwSmallFontHight,
-					(j * 8 + i / 7 + 3) * dwSmallFontHight,
+					(j * 8 + i / 7 + 2) * dwSmallFontHight + 5,
 					dwSmallFontWidth * 3 - 2,
 					dwSmallFontHight - 1);
 			}
 //	Draw Day Indicator (曜日表示)
 			// [iwad] txRect.top = (j * 8 + 1) * dwSmallFontHight;
-			txRect.top = (j * 8 + 2) * dwSmallFontHight;
+			txRect.top = (j * 8 + 1) * dwSmallFontHight + 5;
+			// [iwad] txRect.bottom = txRect.top + dwSmallFontHight;
 			txRect.bottom = txRect.top + dwSmallFontHight;
 
 		// [iwad] 土日カラー対応
@@ -293,7 +297,7 @@ TCHAR	TempStr[256];// Title Buffer
 		#endif
 //	Draw Month and Year
 			// [iwad] txRect.top = j * dwSmallFontHight * 8;
-			txRect.top = j * dwSmallFontHight * 8 + dwSmallFontHight;
+			txRect.top = j * dwSmallFontHight * 8 + 5;
 			txRect.bottom = txRect.top + dwSmallFontHight;
 			txRect.left = FrameWidth + dwSmallFontWidth;
 			txRect.right = txRect.left + 26 * dwSmallFontWidth;
@@ -306,7 +310,7 @@ TCHAR	TempStr[256];// Title Buffer
 			DrawFrame(hDC,
 				FrameWidth + dwSmallFontWidth / 2,	// Frame Left Top Axis
 				// [iwad] j * dwSmallFontHight * 8
-				j * dwSmallFontHight * 8 + dwSmallFontHight,
+				j * dwSmallFontHight * 8 + 5,
 				28 * dwSmallFontWidth - dwSmallFontWidth / 2,
 				dwSmallFontHight * 8);
 		}
@@ -316,8 +320,7 @@ TCHAR	TempStr[256];// Title Buffer
 				// [iwad] j * dwSmallFontHight * 8,
 				j * dwSmallFontHight * 8 + 5,
 				28 * dwSmallFontWidth - dwSmallFontWidth / 2,
-				// [iwad] dwSmallFontHight * 8 + 1);
-				dwSmallFontHight * 8 + 6);
+				dwSmallFontHight * 8 + 1);
 		dwOldCurX = 7;
 		DispCalenderBox(hDC);
 	}
@@ -332,11 +335,12 @@ TCHAR	TempStr[256];// Title Buffer
 	{
 		BarHight = DayLineCount * LineHight;
 		BarUnit = BarHight / (dwFinalTime - dwStartTime + 1) / 2;
-		BarHight = BarUnit * (dwFinalTime - dwStartTime) * 2 + 1;
+		// [iwad] BarHight = BarUnit * (dwFinalTime - dwStartTime) * 2 + 1;
+		BarHight = BarUnit * (dwFinalTime - dwStartTime) * 2 + 6;
 		if(BarUnit)	// Legal Scale Unit?
 			DrawFrame(hDC,	dwSmallFontWidth * 3 + 1,
 						// [iwad] dwSmallFontHight * 3 / 2,
-						dwSmallFontHight * 3 / 2,
+						dwSmallFontHight * 3 / 2 + 5,
 						FrameWidth / 32, 
 						BarHight);
 		for(i = dwStartTime; i < dwFinalTime; i++)
@@ -386,9 +390,11 @@ TCHAR	TempStr[256];// Title Buffer
 			}
 			LinePoint[0].x = LinePoint[3].x = dwSmallFontWidth * 3 + 2;	// Bar Left Top Axis
 			LinePoint[1].x = LinePoint[0].x + FrameWidth / 32 - 1;	// Frame Left Top Axis
-			LinePoint[0].y = LinePoint[1].y = (i - dwStartTime * 2) * BarUnit + dwSmallFontHight * 3 / 2 + 1;
+			// [iwad] LinePoint[0].y = LinePoint[1].y = (i - dwStartTime * 2) * BarUnit + dwSmallFontHight * 3 / 2 + 1;
+			LinePoint[0].y = LinePoint[1].y = (i - dwStartTime * 2) * BarUnit + dwSmallFontHight * 3 / 2 + 6;
 			LinePoint[2].x = LinePoint[1].x;
-			LinePoint[2].y = LinePoint[3].y = LinePoint[0].y + BarUnit;
+			// [iwad] LinePoint[2].y = LinePoint[3].y = LinePoint[0].y + BarUnit;
+			LinePoint[2].y = LinePoint[3].y = LinePoint[0].y + BarUnit + 5;
 			hBrush = (HBRUSH )GetStockObject(BrushCode);	// Get Black Pen
 			SelectObject(hDC, hBrush);			// Set Brush
 			Polygon(hDC, LinePoint, 4);	// Draw Todays Line
@@ -489,7 +495,8 @@ DispAgain:
 					else
 						wsprintf(TimeStr, TEXT("%2d:%2.2d"), DispHour, DispMin);
 				}
-				txRect.top = dwSmallFontHight + 2 + i * LineHight;
+				// [iwad] txRect.top = dwSmallFontHight + 2 + i * LineHight;
+				txRect.top = dwSmallFontHight + 2 + i * LineHight + 5;
 				txRect.bottom = txRect.top + LineHight;
 				txRect.left = LineLeft - 8 * dwBigFontWidth;
 				txRect.right = LineLeft - 2 * dwBigFontWidth;
@@ -557,7 +564,8 @@ DispAgain:
 				else
 					wsprintf(TimeStr, TEXT("%2d:%2.2d"), DispHour, DispMin);
 			}
-			txRect.top = dwSmallFontHight + 2 + i * LineHight;
+			// [iwad] txRect.top = dwSmallFontHight + 2 + i * LineHight;
+			txRect.top = dwSmallFontHight + 2 + i * LineHight + 5;
 			txRect.bottom = txRect.top + LineHight;
 			txRect.left = LineLeft - 8 * dwBigFontWidth;
 			txRect.right = LineLeft - 2 * dwBigFontWidth;
@@ -571,7 +579,8 @@ DispAgain:
 //	Draw Title of the Record
 			txRect.left = LineLeft;
 			txRect.right = FrameWidth - 1;
-			txRect.top = i * LineHight + dwSmallFontHight + 2;
+			// [iwad] txRect.top = i * LineHight + dwSmallFontHight + 2;
+			txRect.top = i * LineHight + dwSmallFontHight + 7;
 			txRect.bottom = txRect.top + LineHight;
 			if(DayGenID[0][OneIndex])
 			{
@@ -599,33 +608,36 @@ DispAgain:
 					case 1:	// -
 						LinePoint[0].x = BarLeft;// Blacket Left
 						LinePoint[1].x = LinePoint[0].x - FrameWidth / 128;	// Frame Left Top Axis
-						LinePoint[0].y = LinePoint[1].y =
-							i * LineHight + LineHight / 2 + dwSmallFontHight + 2;
+						// [iwad] LinePoint[0].y = LinePoint[1].y = i * LineHight + LineHight / 2 + dwSmallFontHight + 2;
+						LinePoint[0].y = LinePoint[1].y = i * LineHight + LineHight / 2 + dwSmallFontHight + 7;
 						Polyline(hDC, LinePoint, 2);	// Draw Todays Line
 						break;
 					case 2:	// |
 						LinePoint[0].x = BarLeft - FrameWidth / 128;// Blacket Left
 						LinePoint[1].x = LinePoint[0].x;	// Frame Left Top Axis
-						LinePoint[0].y = i * LineHight + dwSmallFontHight + 2;
+						// [iwad] LinePoint[0].y = i * LineHight + dwSmallFontHight + 2;
+						LinePoint[0].y = i * LineHight + dwSmallFontHight + 7;
 						LinePoint[1].y = LinePoint[0].y + LineHight;
 						Polyline(hDC, LinePoint, 2);	// Draw Todays Line
 						break;
 					case 3:	// Start Blacket
 						LinePoint[0].x = BarLeft;// Blacket Left
 						LinePoint[1].x = LinePoint[0].x - FrameWidth / 128;	// Frame Left Top Axis
-						LinePoint[0].y = LinePoint[1].y =
-							i * LineHight + LineHight / 2 + dwSmallFontHight + 2;
+						// [iwad] LinePoint[0].y = LinePoint[1].y = i * LineHight + LineHight / 2 + dwSmallFontHight + 2;
+						LinePoint[0].y = LinePoint[1].y = i * LineHight + LineHight / 2 + dwSmallFontHight + 7;
 						LinePoint[2].x = LinePoint[1].x;
-						LinePoint[2].y = (i + 1) * LineHight + dwSmallFontHight + 2;
+						// [iwad] LinePoint[2].y = (i + 1) * LineHight + dwSmallFontHight + 2;
+						LinePoint[2].y = (i + 1) * LineHight + dwSmallFontHight + 7;
 						Polyline(hDC, LinePoint, 3);	// Draw Todays Line
 						break;
 					case 4:	// Start Blacket
 						LinePoint[0].x = BarLeft;// Blacket Left
 						LinePoint[1].x = LinePoint[0].x - FrameWidth / 128;	// Frame Left Top Axis
-						LinePoint[0].y = LinePoint[1].y =
-							i * LineHight + LineHight / 2 + dwSmallFontHight + 2;
+						// [iwad] LinePoint[0].y = LinePoint[1].y = i * LineHight + LineHight / 2 + dwSmallFontHight + 2;
+						LinePoint[0].y = LinePoint[1].y = i * LineHight + LineHight / 2 + dwSmallFontHight + 7;
 						LinePoint[2].x = LinePoint[1].x;
-						LinePoint[2].y = i * LineHight + dwSmallFontHight + 1;
+						// [iwad] LinePoint[2].y = i * LineHight + dwSmallFontHight + 1;
+						LinePoint[2].y = i * LineHight + dwSmallFontHight + 6;
 						Polyline(hDC, LinePoint, 3);	// Draw Todays Line
 						break;
 					}
@@ -645,7 +657,8 @@ ReWrite:
 			StartIndex--;
 			PatBlt(hDC,		// Clear Only Schedule Part
 				dwSmallFontWidth * 3 + FrameWidth / 32 + 2,
-				dwSmallFontHight + 2,
+				// [iwad] dwSmallFontHight + 2,
+				dwSmallFontHight + 7,
 				FrameWidth - dwSmallFontWidth * 3 - FrameWidth / 32 - 2,
 				LineHight * DayLineCount, PATCOPY);
 			goto DispAgain;
@@ -696,7 +709,7 @@ void ReverseCalBox(HDC hDC, DWORD x, DWORD y)
 	PatBlt(hDC,
 			x * dwSmallFontWidth * 4 + FrameWidth + dwSmallFontWidth - 1,
 			// [iwad] (y + 2) * dwSmallFontHight,
-			(y + 3) * dwSmallFontHight,	// タップ時の反転表示位置
+			(y + 2) * dwSmallFontHight + 5,	// タップ時の反転表示位置
 			dwSmallFontWidth * 3 - 1,
 			dwSmallFontHight, PATINVERT);
 }
@@ -737,7 +750,8 @@ void ReverseLineBox(HDC hDC, DWORD y)
 {
 	PatBlt(hDC,
 			LineLeft,
-			y * LineHight + dwSmallFontHight + 2,
+			// [iwad] y * LineHight + dwSmallFontHight + 2,
+			y * LineHight + dwSmallFontHight + 7,
 			FrameWidth - LineLeft,
 			dwBigFontHight, PATINVERT);
 }
@@ -1319,7 +1333,7 @@ DWORD	BarPtr, Time;
 		if(HIWORD(lParam) < dwSmallFontHight * 8 + dwWinTop)
 		{
 			Page = 0;
-			if(HIWORD(lParam) <= dwSmallFontHight * 3 + dwWinTop)
+			if(HIWORD(lParam) <= dwSmallFontHight * 3 + dwWinTop + 5)
 			{
 				if(dwYear == 1951 && dwMonth == 1)
 					return;
@@ -1334,8 +1348,7 @@ DWORD	BarPtr, Time;
 					dwCurX++;
 				goto MoveMonth;
 			}
-			// [iwad] CurY = (HIWORD(lParam) - dwSmallFontHight * 2 - dwWinTop) / dwSmallFontHight;
-			CurY = (HIWORD(lParam) - dwSmallFontHight * 3 - dwWinTop) / dwSmallFontHight;
+			CurY = (HIWORD(lParam) - dwSmallFontHight * 2 - dwWinTop) / dwSmallFontHight;
 		}
 		else
 		{
