@@ -581,6 +581,7 @@ JumpFullScreen:
 //	Set Option Settings
 		case IDM_VIEW_OPTION:
 			extern BOOL SetMenuBar(UINT);	// [iwad] extern宣言してしまっている → 要改善項目
+
 			if(FileLock)	// Can't Change BackGround Mode while it Works
 				break;
 
@@ -594,13 +595,12 @@ JumpFullScreen:
 				SetupFont(hMemDC);	// Setup Current Font
 				if(DispMode != 4)	// if Input Screen then Save Current Screen
 				{
-					// [iwad] ソフトキーを元に戻す
-					SetMenuBar(IDR_MENUBAR1);
-
 					SetupMainScreen(hMemDC);// Update Current Screen
 					InvalidateRect(hWnd, NULL, FALSE);// Show!
 				}
 			}
+			// [iwad] ソフトキーを元に戻す
+			SetMenuBar(IDR_MENUBAR1);
 			break;
 //	Jump DialogBox
 		case IDM_JUMP_DATE:

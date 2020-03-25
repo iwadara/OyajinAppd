@@ -27,7 +27,7 @@
 LPCTSTR		szHelpFileName =	TEXT("APPHELP.HLP");// Help FileName
 LPCTSTR		szRegName =			TEXT("Software\\Oyajin\\Appointment");
 LPCTSTR		szWinName =			TEXT("OyajinApo");	// Class name
-LPCTSTR		szVerNum =			TEXT("0.40");		// szVerNum Number TEXT	[iwad]
+LPCTSTR		szVerNum =			TEXT("0.41");		// szVerNum Number TEXT	[iwad]
 //LPCTSTR		szVerNum =			TEXT("0.99f-u01");		// szVerNum Number TEXT	by uminchu
 //LPCTSTR		szVerNum =			TEXT("0.99f");		// szVerNum Number TEXT
 
@@ -607,4 +607,3 @@ LPCTSTR		RegTable2[][4] = {
 	TEXT("Open"),(TCHAR *)0,	szOpenNameR,	TEXT(""),
 	NULL, NULL, NULL, NULL
 };
-

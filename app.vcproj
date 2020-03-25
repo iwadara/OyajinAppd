@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="app"
+	Name="appd"
 	ProjectGUID="{9AC5114C-5FAC-47B4-B0B2-F796C84D278B}"
 	RootNamespace="app"
 	>

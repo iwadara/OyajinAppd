@@ -462,12 +462,12 @@ BEGIN
     POPUP "ﾌｧｲﾙ(&F)"
     BEGIN
         MENUITEM "新規作成(&N)...",                 IDM_FILE_NEW
-        MENUITEM "開く(&O)...\tCtrl+O",           IDM_FILE_OPEN
+        MENUITEM "開く...\tCtrl+O",               IDM_FILE_OPEN
         MENUITEM "名前を付けて保存(&P)...",             IDM_FILE_COPY
         MENUITEM "表示中のﾃﾞｰﾀを閉じる(&C)",            IDM_FILE_CLOSE
         MENUITEM SEPARATOR
-        MENUITEM "ﾒﾓにﾃｷｽﾄを挿入(&I)...\tCtrl+Y",   IDM_FILE_INSERT
-        MENUITEM "ﾒﾓの保存(&W)...\tCtrl+S",        IDM_FILE_WRITE
+        MENUITEM "ﾒﾓにﾃｷｽﾄを挿入...\tCtrl+Y",       IDM_FILE_INSERT
+        MENUITEM "ﾒﾓの保存...\tCtrl+S",            IDM_FILE_WRITE
         MENUITEM SEPARATOR
         MENUITEM "ｲﾝﾎﾟｰﾄ(&I)...",               IDM_FILE_IMPORT
         MENUITEM "ｴｸｽﾎﾟｰﾄ(&E)...",              IDM_FILE_EXPORT
@@ -477,43 +477,43 @@ BEGIN
     END
     POPUP "編集(&E)"
     BEGIN
-        MENUITEM "ToDoの編集(&T)\tCtrl+Enter",     IDM_EDIT_TODO
-        MENUITEM "裏のｽｹｼﾞｭｰﾙ編集(&A)\tALT+Enter",  IDM_EDIT_ALT
-        MENUITEM "ﾒﾓの編集(&N)\tShift+Enter",      IDM_EDIT_FULL
+        MENUITEM "ToDoの編集\tCtrl+Enter",         IDM_EDIT_TODO
+        MENUITEM "裏のｽｹｼﾞｭｰﾙ編集\tALT+Enter",      IDM_EDIT_ALT
+        MENUITEM "ﾒﾓの編集\tShift+Enter",          IDM_EDIT_FULL
         MENUITEM SEPARATOR
-        MENUITEM "削除(&D)\tDel",                 IDM_EDIT_DELETE
-        MENUITEM "元に戻す(&U)\tCtrl+Z",            IDM_EDIT_UNDO
+        MENUITEM "削除\tDel",                     IDM_EDIT_DELETE
+        MENUITEM "元に戻す\tCtrl+Z",                IDM_EDIT_UNDO
         MENUITEM SEPARATOR
-        MENUITEM "切り取り(&X)\tCtrl+X",            IDM_EDIT_CUT
-        MENUITEM "ｺﾋﾟｰ(&C)\tCtrl+C",            IDM_EDIT_COPY
-        MENUITEM "貼り付け(&P)\tCtrl+V",            IDM_EDIT_PASTE
+        MENUITEM "切り取り\tCtrl+X",                IDM_EDIT_CUT
+        MENUITEM "ｺﾋﾟｰ\tCtrl+C",                IDM_EDIT_COPY
+        MENUITEM "貼り付け\tCtrl+V",                IDM_EDIT_PASTE
     END
     POPUP "表示(&V)"
     BEGIN
-        MENUITEM "入力ﾓｰﾄﾞ(&I)\tEnter",           IDM_VIEW_INPUT
-        MENUITEM "日表示ﾓｰﾄﾞ(&D)\tCtrl+D",         IDM_VIEW_DAY
-        MENUITEM "週表示ﾓｰﾄﾞ(&W)\tCtrl+W",         IDM_VIEW_WEEK
-        MENUITEM "月表示ﾓｰﾄﾞ(&M)\tCtrl+M",         IDM_VIEW_MONTH
-        MENUITEM "半年表示ﾓｰﾄﾞ(&H)\tCtrl+H",        IDM_VIEW_HALFYEAR
-        MENUITEM "ToDo表示ﾓｰﾄﾞ(&T)\tCtrl+T",      IDM_VIEW_TODO
+        MENUITEM "入力ﾓｰﾄﾞ\tCtrl+I",              IDM_VIEW_INPUT
+        MENUITEM "日表示ﾓｰﾄﾞ\tCtrl+D",             IDM_VIEW_DAY
+        MENUITEM "週表示ﾓｰﾄﾞ\tCtrl+W",             IDM_VIEW_WEEK
+        MENUITEM "月表示ﾓｰﾄﾞ\tCtrl+M",             IDM_VIEW_MONTH
+        MENUITEM "半年表示ﾓｰﾄﾞ\tCtrl+H",            IDM_VIEW_HALFYEAR
+        MENUITEM "ToDo表示ﾓｰﾄﾞ\tCtrl+T",          IDM_VIEW_TODO
         MENUITEM SEPARATOR
-        MENUITEM "ﾒﾆｭｰを隠す(&N)\tCtrl+N",         IDM_VIEW_MINIMIZE
+        MENUITEM "ﾒﾆｭｰを隠す\tCtrl+N",             IDM_VIEW_MINIMIZE
         MENUITEM SEPARATOR
-        MENUITEM "ﾌﾟﾗｲﾍﾞｰﾄ(&P)\tCtrl+P",        IDM_VIEW_PRIVATE
+        MENUITEM "ﾌﾟﾗｲﾍﾞｰﾄ\tCtrl+P",            IDM_VIEW_PRIVATE
         MENUITEM SEPARATOR
-        MENUITEM "ｵﾌﾟｼｮﾝ(&O)...\tCtrl+A",       IDM_VIEW_OPTION
+        MENUITEM "ｵﾌﾟｼｮﾝ...\tCtrl+A",           IDM_VIEW_OPTION
     END
     POPUP "移動(&J)"
     BEGIN
-        MENUITEM "日付(&D)...\tCtrl+J",           IDM_JUMP_DATE
+        MENUITEM "日付...\tCtrl+J",               IDM_JUMP_DATE
         MENUITEM SEPARATOR
-        MENUITEM "検索(&F)...\tCtrl+F",           IDM_JUMP_FIND
+        MENUITEM "検索...\tCtrl+F",               IDM_JUMP_FIND
     END
     POPUP "ﾍﾙﾌﾟ(&H)"
     BEGIN
-        MENUITEM "ｲﾝﾃﾞｯｸｽ(&I)...",              IDM_HELP_TOPIC
+        MENUITEM "ﾍﾙﾌﾟ...",                     IDM_HELP_TOPIC
         MENUITEM SEPARATOR
-        MENUITEM "Appdについて(&A)...",             IDM_HELP_ABOUT
+        MENUITEM "Appdについて...",                 IDM_HELP_ABOUT
     END
 END
 
@@ -521,27 +521,27 @@ IDM_MAIN_MENU MENU
 BEGIN
     POPUP "右メニュー"
     BEGIN
-        MENUITEM "月表示ﾓｰﾄﾞ(&M)\tCtrl+M",         IDM_VIEW_MONTH
-        MENUITEM "週表示ﾓｰﾄﾞ(&W)\tCtrl+W",         IDM_VIEW_WEEK
-        MENUITEM "日表示ﾓｰﾄﾞ(&D)\tCtrl+D",         IDM_VIEW_DAY
-        MENUITEM "半年表示ﾓｰﾄﾞ(&H)\tCtrl+H",        IDM_VIEW_HALFYEAR
-        MENUITEM "ToDo表示ﾓｰﾄﾞ(&T)\tCtrl+T",      IDM_VIEW_TODO
+        MENUITEM "月表示ﾓｰﾄﾞ\tCtrl+M",             IDM_VIEW_MONTH
+        MENUITEM "週表示ﾓｰﾄﾞ\tCtrl+W",             IDM_VIEW_WEEK
+        MENUITEM "日表示ﾓｰﾄﾞ\tCtrl+D",             IDM_VIEW_DAY
+        MENUITEM "半年表示ﾓｰﾄﾞ\tCtrl+H",            IDM_VIEW_HALFYEAR
+        MENUITEM "ToDo表示ﾓｰﾄﾞ\tCtrl+T",          IDM_VIEW_TODO
         MENUITEM SEPARATOR
-        MENUITEM "ﾌﾟﾗｲﾍﾞｰﾄ(&P)\tCtrl+P",        IDM_VIEW_PRIVATE
+        MENUITEM "ﾌﾟﾗｲﾍﾞｰﾄ\tCtrl+P",            IDM_VIEW_PRIVATE
         MENUITEM SEPARATOR
-        MENUITEM "ｵﾌﾟｼｮﾝ(&O)...\tCtrl+A",       IDM_VIEW_OPTION
+        MENUITEM "ｵﾌﾟｼｮﾝ...\tCtrl+A",           IDM_VIEW_OPTION
     END
     POPUP "左メニュー"
     BEGIN
         POPUP "ﾌｧｲﾙ"
         BEGIN
             MENUITEM "新規作成(&N)...",                 IDM_FILE_NEW
-            MENUITEM "開く(&O)...\tCtrl+O",           IDM_FILE_OPEN
+            MENUITEM "開く...\tCtrl+O",               IDM_FILE_OPEN
             MENUITEM "名前を付けて保存(&P)...",             IDM_FILE_COPY
             MENUITEM "表示中のﾃﾞｰﾀを閉じる(&C)",            IDM_FILE_CLOSE
             MENUITEM SEPARATOR
-            MENUITEM "ﾒﾓにﾃｷｽﾄを挿入(&I)...\tCtrl+Y",   IDM_FILE_INSERT
-            MENUITEM "ﾒﾓの保存(&W)...\tCtrl+S",        IDM_FILE_WRITE
+            MENUITEM "ﾒﾓにﾃｷｽﾄを挿入...\tCtrl+Y",       IDM_FILE_INSERT
+            MENUITEM "ﾒﾓの保存...\tCtrl+S",            IDM_FILE_WRITE
             MENUITEM SEPARATOR
             MENUITEM "ｲﾝﾎﾟｰﾄ(&I)...",               IDM_FILE_IMPORT
             MENUITEM "ｴｸｽﾎﾟｰﾄ(&E)...",              IDM_FILE_EXPORT
@@ -549,43 +549,38 @@ BEGIN
         END
         POPUP "編集(&E)"
         BEGIN
-            MENUITEM "削除(&D)\tDel",                 IDM_EDIT_DELETE
-            MENUITEM "元に戻す(&U)\tCtrl+Z",            IDM_EDIT_UNDO
+            MENUITEM "削除\tDel",                     IDM_EDIT_DELETE
+            MENUITEM "元に戻す\tCtrl+Z",                IDM_EDIT_UNDO
             MENUITEM SEPARATOR
-            MENUITEM "切り取り(&X)\tCtrl+X",            IDM_EDIT_CUT
-            MENUITEM "ｺﾋﾟｰ(&C)\tCtrl+C",            IDM_EDIT_COPY
-            MENUITEM "貼り付け(&P)\tCtrl+V",            IDM_EDIT_PASTE
+            MENUITEM "切り取り\tCtrl+X",                IDM_EDIT_CUT
+            MENUITEM "ｺﾋﾟｰ\tCtrl+C",                IDM_EDIT_COPY
+            MENUITEM "貼り付け\tCtrl+V",                IDM_EDIT_PASTE
         END
         POPUP "移動(&J)"
         BEGIN
-            MENUITEM "検索(&F)...\tCtrl+F",           IDM_JUMP_FIND
-            MENUITEM "日付(&D)...\tCtrl+J",           IDM_JUMP_DATE
+            MENUITEM "検索...\tCtrl+F",               IDM_JUMP_FIND
+            MENUITEM "日付...\tCtrl+J",               IDM_JUMP_DATE
             MENUITEM SEPARATOR
-            MENUITEM "入力ﾓｰﾄﾞ(&I)\tEnter",           IDM_VIEW_INPUT
-            MENUITEM "ToDoの編集(&T)\tCtrl+Enter",     IDM_EDIT_TODO
-            MENUITEM "裏のｽｹｼﾞｭｰﾙ編集(&A)\tALT+Enter",  IDM_EDIT_ALT
-            MENUITEM "ﾒﾓの編集(&N)\tShift+Enter",      IDM_EDIT_FULL
+            MENUITEM "入力ﾓｰﾄﾞ\tCtrl+I",              IDM_VIEW_INPUT
+            MENUITEM "ToDoの編集\tCtrl+Enter",         IDM_EDIT_TODO
+            MENUITEM "裏のｽｹｼﾞｭｰﾙ編集\tALT+Enter",      IDM_EDIT_ALT
+            MENUITEM "ﾒﾓの編集\tShift+Enter",          IDM_EDIT_FULL
         END
         MENUITEM SEPARATOR
         MENUITEM "終了(&X)",                      IDM_FILE_EXIT
     END
     POPUP "タップ＆ホールドメニュー"
     BEGIN
-        MENUITEM "切り取り(&X)\tCtrl+X",            IDM_EDIT_CUT
-        MENUITEM "ｺﾋﾟｰ(&C)\tCtrl+C",            IDM_EDIT_COPY
-        MENUITEM "貼り付け(&P)\tCtrl+V",            IDM_EDIT_PASTE
+        MENUITEM "切り取り\tCtrl+X",                IDM_EDIT_CUT
+        MENUITEM "ｺﾋﾟｰ\tCtrl+C",                IDM_EDIT_COPY
+        MENUITEM "貼り付け\tCtrl+V",                IDM_EDIT_PASTE
         MENUITEM SEPARATOR
-        MENUITEM "削除(&D)\tDel",                 IDM_EDIT_DELETE
+        MENUITEM "削除\tDel",                     IDM_EDIT_DELETE
     END
     POPUP "オプション用"
     BEGIN
         MENUITEM "OK",                          IDOK
         MENUITEM "キャンセル",                       IDCANCEL
-    END
-    POPUP "保留メニュー"
-    BEGIN
-        MENUITEM "ﾒﾆｭｰを隠す(&N)\tCtrl+N",         IDM_VIEW_MINIMIZE
-        MENUITEM "ｲﾝﾃﾞｯｸｽ(&I)...",              IDM_HELP_TOPIC
     END
 END
 
@@ -596,12 +591,12 @@ BEGIN
         POPUP "ﾌｧｲﾙ(&F)"
         BEGIN
             MENUITEM "新規作成(&N)...",                 IDM_FILE_NEW
-            MENUITEM "開く(&O)...\tCtrl+O",           IDM_FILE_OPEN
+            MENUITEM "開く...\tCtrl+O",               IDM_FILE_OPEN
             MENUITEM "名前を付けて保存(&P)...",             IDM_FILE_COPY
             MENUITEM "表示中のﾃﾞｰﾀを閉じる(&C)",            IDM_FILE_CLOSE
             MENUITEM SEPARATOR
-            MENUITEM "ﾒﾓにﾃｷｽﾄを挿入(&I)...\tCtrl+Y",   IDM_FILE_INSERT
-            MENUITEM "ﾒﾓの保存(&W)...\tCtrl+S",        IDM_FILE_WRITE
+            MENUITEM "ﾒﾓにﾃｷｽﾄを挿入...\tCtrl+Y",       IDM_FILE_INSERT
+            MENUITEM "ﾒﾓの保存...\tCtrl+S",            IDM_FILE_WRITE
             MENUITEM SEPARATOR
             MENUITEM "ｲﾝﾎﾟｰﾄ(&I)...",               IDM_FILE_IMPORT
             MENUITEM "ｴｸｽﾎﾟｰﾄ(&E)...",              IDM_FILE_EXPORT
@@ -612,39 +607,39 @@ BEGIN
         END
         POPUP "編集(&E)"
         BEGIN
-            MENUITEM "ToDoの編集(&T)\tCtrl+Enter",     IDM_EDIT_TODO
-            MENUITEM "裏のｽｹｼﾞｭｰﾙ編集(&A)\tALT+Enter",  IDM_EDIT_ALT
-            MENUITEM "ﾒﾓの編集(&N)\tShift+Enter",      IDM_EDIT_FULL
+            MENUITEM "ToDoの編集\tCtrl+Enter",         IDM_EDIT_TODO
+            MENUITEM "裏のｽｹｼﾞｭｰﾙ編集\tALT+Enter",      IDM_EDIT_ALT
+            MENUITEM "ﾒﾓの編集\tShift+Enter",          IDM_EDIT_FULL
             MENUITEM SEPARATOR
-            MENUITEM "切り取り(&X)\tCtrl+X",            IDM_EDIT_CUT
-            MENUITEM "ｺﾋﾟｰ(&C)\tCtrl+C",            IDM_EDIT_COPY
-            MENUITEM "貼り付け(&P)\tCtrl+V",            IDM_EDIT_PASTE
+            MENUITEM "切り取り\tCtrl+X",                IDM_EDIT_CUT
+            MENUITEM "ｺﾋﾟｰ\tCtrl+C",                IDM_EDIT_COPY
+            MENUITEM "貼り付け\tCtrl+V",                IDM_EDIT_PASTE
             MENUITEM SEPARATOR
-            MENUITEM "削除(&D)\tDel",                 IDM_EDIT_DELETE
-            MENUITEM "元に戻す(&U)\tCtrl+Z",            IDM_EDIT_UNDO
+            MENUITEM "削除\tDel",                     IDM_EDIT_DELETE
+            MENUITEM "元に戻す\tCtrl+Z",                IDM_EDIT_UNDO
         END
         POPUP "表示(&V)"
         BEGIN
-            MENUITEM "入力ﾓｰﾄﾞ(&I)\tEnter",           IDM_VIEW_INPUT
-            MENUITEM "日表示ﾓｰﾄﾞ(&D)\tCtrl+D",         IDM_VIEW_DAY
-            MENUITEM "週表示ﾓｰﾄﾞ(&W)\tCtrl+W",         IDM_VIEW_WEEK
-            MENUITEM "月表示ﾓｰﾄﾞ(&M)\tCtrl+M",         IDM_VIEW_MONTH
-            MENUITEM "半年表示ﾓｰﾄﾞ(&H)\tCtrl+H",        IDM_VIEW_HALFYEAR
-            MENUITEM "ToDo表示ﾓｰﾄﾞ(&T)\tCtrl+T",      IDM_VIEW_TODO
+            MENUITEM "入力ﾓｰﾄﾞ\tCtrl+I",              IDM_VIEW_INPUT
+            MENUITEM "日表示ﾓｰﾄﾞ\tCtrl+D",             IDM_VIEW_DAY
+            MENUITEM "週表示ﾓｰﾄﾞ\tCtrl+W",             IDM_VIEW_WEEK
+            MENUITEM "月表示ﾓｰﾄﾞ\tCtrl+M",             IDM_VIEW_MONTH
+            MENUITEM "半年表示ﾓｰﾄﾞ\tCtrl+H",            IDM_VIEW_HALFYEAR
+            MENUITEM "ToDo表示ﾓｰﾄﾞ\tCtrl+T",          IDM_VIEW_TODO
             MENUITEM SEPARATOR
-            MENUITEM "ﾒﾆｭｰを隠す(&N)\tCtrl+N",         IDM_VIEW_MINIMIZE
+            MENUITEM "ﾒﾆｭｰを隠す\tCtrl+N",             IDM_VIEW_MINIMIZE
             MENUITEM SEPARATOR
-            MENUITEM "ﾌﾟﾗｲﾍﾞｰﾄ(&P)\tCtrl+P",        IDM_VIEW_PRIVATE
+            MENUITEM "ﾌﾟﾗｲﾍﾞｰﾄ\tCtrl+P",            IDM_VIEW_PRIVATE
             MENUITEM SEPARATOR
         END
         POPUP "移動(&J)"
         BEGIN
-            MENUITEM "日付(&D)...\tCtrl+J",           IDM_JUMP_DATE
+            MENUITEM "日付...\tCtrl+J",               IDM_JUMP_DATE
             MENUITEM SEPARATOR
-            MENUITEM "検索(&F)...\tCtrl+F",           IDM_JUMP_FIND
+            MENUITEM "検索...\tCtrl+F",               IDM_JUMP_FIND
         END
         MENUITEM SEPARATOR
-        MENUITEM "ｵﾌﾟｼｮﾝ(&O)...\tCtrl+A",       IDM_VIEW_OPTION
+        MENUITEM "ｵﾌﾟｼｮﾝ...\tCtrl+A",           IDM_VIEW_OPTION
     END
 END
 
@@ -724,11 +719,6 @@ BEGIN
         BOTTOMMARGIN, 69
     END
 
-    IDD_PROP_DEFAULTS, DIALOG
-    BEGIN
-        BOTTOMMARGIN, 110
-    END
-
     IDD_PROP_COLOR, DIALOG
     BEGIN
         LEFTMARGIN, 7
@@ -739,13 +729,11 @@ BEGIN
     BEGIN
         LEFTMARGIN, 7
         TOPMARGIN, 7
-        BOTTOMMARGIN, 122
     END
 
     IDD_ABOUTDLG, DIALOG
     BEGIN
         LEFTMARGIN, 3
-        RIGHTMARGIN, 134
         TOPMARGIN, 3
         BOTTOMMARGIN, 87
     END
@@ -822,7 +810,7 @@ BEGIN
     IDS_LEFTBUTTON          "表示"
     IDS_RIGHTBUTTON         "メニュー"
     IDS_OK                  " "
-    IDS_CANCEL              " "
+    IDS_CANCEL              "  "
 END
 
 #endif    // 日本語 resources

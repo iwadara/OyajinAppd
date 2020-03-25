@@ -208,7 +208,6 @@
 #define IDM_FILE_WRITE                  40031
 #define IDM_FILE_INSERT                 40032
 #define IDM_FILE_SYNC                   40033
-#define ID                              40034
 
 // Next default values for new objects
 // 
@@ -216,7 +215,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        123
-#define _APS_NEXT_COMMAND_VALUE         40035
+#define _APS_NEXT_COMMAND_VALUE         40038
 #define _APS_NEXT_CONTROL_VALUE         1138
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

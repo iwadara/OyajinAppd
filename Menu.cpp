@@ -84,7 +84,8 @@ static BOOL	TestMonth(void);
 static BOOL	TestHalf(void);
 static BOOL	TestToDoView(void);
 static BOOL	TestJump(void);
-BOOL SetMenuBar(UINT);	// [iwad]
+BOOL	SetMenuBar(UINT);			// [iwad] ソフトキーメニュー
+UINT	MenuBarRes = IDR_MENUBAR1;	// [iwad] ソフトキー状態の保持
 //
 //	Definision
 //
@@ -303,16 +304,17 @@ static BOOL TestJump(void)
 	return	(DispMode < 4);
 }
 //
-// SetMenuBar() [iwad]
+// [iwad] Soft Key Menu Bar
 //
 BOOL SetMenuBar(UINT iRes)
 {
+	SHMENUBARINFO sMenu;
+
 	if (hTB != NULL)
 	{
 		SendMessage(hTB, WM_CLOSE, 0, 0);
 	}
 
-	SHMENUBARINFO sMenu;
 	memset(&sMenu, 0, sizeof(SHMENUBARINFO));
 	sMenu.cbSize = sizeof(SHMENUBARINFO);
 	sMenu.hwndParent = hMainWnd;	// メニューバーを所有する(WM_COMMANDを処理する)ウィンドウのハンドル
@@ -325,6 +327,7 @@ BOOL SetMenuBar(UINT iRes)
 	if (SHCreateMenuBar(&sMenu))
 	{
 		hTB = sMenu.hwndMB;
+		MenuBarRes = iRes;	// [iwad] ソフトキー状態の保持(Global)
 	}
 
 	return 0;
@@ -341,8 +344,11 @@ DWORD	i, j;
 	if(hTB == NULL)
 		return;
 #ifdef	_WIN32_WCE
-	// [iwad] メニューバーのセット
-	SetMenuBar(IDR_MENUBAR1);
+	// [iwad] メニューバーのセット(縦横切替対応のため、現在のソフトキー状態を判断)
+	if (MenuBarRes == IDR_MENUBAR2)
+		SetMenuBar(IDR_MENUBAR2);
+	else
+		SetMenuBar(IDR_MENUBAR1);
 
 	if(hCmdBar == NULL)	// No Menu Mode??
 		return;
