@@ -1,7 +1,0 @@
-› ‰¡‰æ–Ê
-dwXsize: 480
-dwYsize: 540
-
-› ‰¡‰æ–Ê
-dwXsize: 640
-dwYsize: 380
