@@ -203,7 +203,7 @@ DWORD	Style, FieldAttr;
 TCHAR	*ClassName = TEXT("");
 HWND	hWnd;
 TCHAR	String[256];
-	//DestroyInputWindows();	// Clear Old Windows
+	DestroyInputWindows();	// Clear Old Windows
 	for(fptr = MainWork.FieldList; fptr->Attr; fptr++)
 	{	// Repeat for All Field
 		FieldAttr = fptr->Attr;	// Get Attr

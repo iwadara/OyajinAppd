@@ -86,11 +86,14 @@ int		PastDay;	// ToDo Past Day
 	DrawFrame(hDC, 0, 0, FrameWidth, 4 + dwSmallFontHight + LineHight * ToDoLineCount);
 	LinePoint[0].x = 0;				// Frame Left Top Axis
 	LinePoint[1].x = FrameWidth;	// Frame Left Top Axis
-	LinePoint[0].y = LinePoint[1].y = dwSmallFontHight + 1;
+	// [iwad] LinePoint[0].y = LinePoint[1].y = dwSmallFontHight + 1;
+	LinePoint[0].y = LinePoint[1].y = dwSmallFontHight + 5;
 	Polyline(hDC, LinePoint, 2);	// Draw Todays Line
 	SelectObject(hDC, hSmallFont);		// Set Font (Small)
-	txRect.top = 1;
-	txRect.bottom = dwSmallFontHight ;
+	// [iwad] txRect.top = 1;
+	txRect.top = 5;
+	// [iwad] txRect.bottom = dwSmallFontHight ;
+	txRect.bottom = dwSmallFontHight + 4;
 	txRect.left = 1;
 	txRect.right = FrameWidth - 2;
 	if(dwDateFormat)
@@ -107,7 +110,8 @@ int		PastDay;	// ToDo Past Day
 		ShortDayName[GetCurrentWeekDay()]);
 	DrawText(hDC, TempStr, -1, &txRect, DT_CENTER | DT_VCENTER);
 	if(dwPrivate)
-		PatBlt(hDC, 1, 1, FrameWidth - 1, dwSmallFontHight + 1, PATINVERT);
+		// [iwad] PatBlt(hDC, 1, 1, FrameWidth - 1, dwSmallFontHight + 1, PATINVERT);
+		PatBlt(hDC, 1, 1, FrameWidth - 1, dwSmallFontHight + 5, PATINVERT);
 	//
 	SelectObject(hDC, hBigFont);		// Set Font (Small)
 	for(i = 0; i < ToDoLineCount; i++)
@@ -138,8 +142,10 @@ int		PastDay;	// ToDo Past Day
 		DispYear = TargetDay / 512 + 1950;
 		DispMonth = TargetDay / 32 & 15;
 		DispDay = TargetDay & 31;
-		txRect.top = dwSmallFontHight + 2 + i * LineHight;
-		txRect.bottom = txRect.top + LineHight;
+		// [iwad] txRect.top = dwSmallFontHight + 2 + i * LineHight;
+		txRect.top = dwSmallFontHight + 2 + i * LineHight + 4;
+		// [iwad] txRect.bottom = txRect.top + LineHight;
+		txRect.bottom = txRect.top + LineHight + 4;
 		txRect.left = dwBigFontWidth;
 		txRect.right = txRect.left + 14 * dwBigFontWidth;
 		if(dwDateFormat)// US Format?
@@ -204,7 +210,8 @@ void ReverseToDoBox(HDC hDC, DWORD y)
 {
 	PatBlt(hDC,
 			LineLeft,
-			y * LineHight + dwSmallFontHight + 2,
+			// [iwad] y * LineHight + dwSmallFontHight + 2,
+			y * LineHight + dwSmallFontHight + 8,
 			LineWidth,
 			dwBigFontHight, PATINVERT);
 }
@@ -354,8 +361,10 @@ RECT	txRect;
 		wsprintf(TempStr, TEXT("%c %s"), Mark, DayTitle[0][i]);
 		txRect.left = Left + 1;
 		txRect.right = txRect.left + Width - 1;
-		txRect.top = Top + i * dwSmallFontHight + 1;
-		txRect.bottom = txRect.top + dwSmallFontHight;
+		// [iwad] txRect.top = Top + i * dwSmallFontHight + 1;
+		txRect.top = Top + i * dwSmallFontHight + 5;
+		// [iwad] txRect.bottom = txRect.top + dwSmallFontHight;
+		txRect.bottom = txRect.top + dwSmallFontHight + 4;
 		DrawText(hDC, TempStr, -1, &txRect, DT_LEFT | DT_VCENTER);
 	}
 }

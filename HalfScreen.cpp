@@ -89,6 +89,12 @@ DWORD	i, j, k;	// Temp Counter
 TCHAR	TempStr[256];// Title Buffer
 TCHAR	TimeStr[8];
 DWORD	CurrentPage;
+DWORD	DispMat = 3; // [iwad] 縦画面モード時 (2)×3、横画面モード時 (3)×2
+// [iwad] 縦画面モード時は月表示を2×3にする
+	if (dwYsize > 500)
+	{
+		DispMat = 2;
+	}
 //	Setup Dimensions (Get Calender Width)
 	for(CalWidth = 3; CalWidth > 0; CalWidth--)
 	{
@@ -163,9 +169,10 @@ DWORD	CurrentPage;
 				if(MonthBuf[k][i][1] != Month)
 					continue;
 				txRect.left =
-					((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
+				// [iwad]	((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
+					((j % DispMat) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
 				// [iwad] txRect.top = ((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight;
-				txRect.top = ((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight + 5;
+				txRect.top = ((j / DispMat) * 8 + i / 7 + 2) * dwSmallFontHight + 5;
 				txRect.bottom = txRect.top + dwSmallFontHight;
 				txRect.right = txRect.left + dwSmallFontWidth * 5 / 2;
 				if(MonthBuf[k][i][2] < 10)
@@ -209,33 +216,35 @@ DWORD	CurrentPage;
 				if(dwUnderBar && dwPrivate == 0 && OyajiSearchRecord(&MainWork))
 				{	// Search Main File & Key is dwDlg Works
 					LinePoint[0].x = 	// Frame Left Top Axis
-						((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
+					// [iwad]	((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
+					((j % DispMat) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
 					LinePoint[1].x = 
 						LinePoint[0].x + dwSmallFontWidth * 2; 
 					// [iwad] LinePoint[0].y = LinePoint[1].y = ((j / 3) * 8 + i / 7 + 3) * dwSmallFontHight - 1;
-					LinePoint[0].y = LinePoint[1].y = ((j / 3) * 8 + i / 7 + 3) * dwSmallFontHight + 4;
+					LinePoint[0].y = LinePoint[1].y = ((j / DispMat) * 8 + i / 7 + 3) * dwSmallFontHight + 4;
 					Polyline(hDC, LinePoint, 2);	// Draw Todays Line
 				}
 				if(MonthBuf[k][i][0] == dwTodayYear
 				&& MonthBuf[k][i][1] == dwTodayMonth
 				&& MonthBuf[k][i][2] == dwTodayDay)
 				DrawFrame(hDC,
-					((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth - 1,
+					// [iwad] ((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth - 1,
+					((j % DispMat) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth - 1,
 					// [iwad] ((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight,
-					((j / 3) * 8 + i / 7 + 2) * dwSmallFontHight + 5,
+					((j / DispMat) * 8 + i / 7 + 2) * dwSmallFontHight + 5,
 					dwSmallFontWidth * 5 / 2,
 					dwSmallFontHight - 1);
 			}
 //	Draw Day Indicator (曜日表示)
 			// [iwad] txRect.top = ((j / 3) * 8 + 1) * dwSmallFontHight;
-			txRect.top = ((j / 3) * 8 + 1) * dwSmallFontHight + 5;
+			txRect.top = ((j / DispMat) * 8 + 1) * dwSmallFontHight + 5;
 			txRect.bottom = txRect.top + dwSmallFontHight;
 
 		// [iwad] 土日カラー対応
 			for(i = 0;i < 7; i++)
 			{
-				txRect.left =
-					((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
+				// [iwad] txRect.left = ((j % 3) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
+				txRect.left = ((j % DispMat) * 22 + (i % 7) * 3 + 1) * dwSmallFontWidth + FrameWidth;
 				txRect.right = txRect.left + dwSmallFontWidth * 3;
 				if (i == 0)	// Sunday
 				{
@@ -271,9 +280,10 @@ DWORD	CurrentPage;
 		#endif
 //	Draw Month and Year
 			// [iwad] txRect.top = (j / 3) * dwSmallFontHight * 8;
-			txRect.top = (j / 3) * dwSmallFontHight * 8 + 5;
+			txRect.top = (j / DispMat) * dwSmallFontHight * 8 + 5;
 			txRect.bottom = txRect.top + dwSmallFontHight;
-			txRect.left = ((j % 3) * 22 + 1) * dwSmallFontWidth + FrameWidth;
+			// [iwad] txRect.left = ((j % 3) * 22 + 1) * dwSmallFontWidth + FrameWidth;
+			txRect.left = ((j % DispMat) * 22 + 1) * dwSmallFontWidth + FrameWidth;
 			txRect.right = txRect.left + 21 * dwSmallFontWidth;
 			if(dwDateFormat)
 				wsprintf(TempStr, TEXT("%s %d"), MonthName[Month - 1], Year);
@@ -282,17 +292,19 @@ DWORD	CurrentPage;
 			DrawText(hDC, TempStr, -1, &txRect, DT_CENTER | DT_VCENTER);
 //	Draw Frame
 			DrawFrame(hDC,
-				(j % 3) * 22 * dwSmallFontWidth + FrameWidth + dwSmallFontWidth / 4,	// Frame Left Top Axis
-				// [iwad] (j / 3) * dwSmallFontHight * 8,
-				(j / 3) * dwSmallFontHight * 8 + 5,
-				dwSmallFontWidth * 21 + dwSmallFontWidth / 2,
-				dwSmallFontHight * 8);
+			// [iwad] (j % 3) * 22 * dwSmallFontWidth + FrameWidth + dwSmallFontWidth / 4,
+			(j % DispMat) * 22 * dwSmallFontWidth + FrameWidth + dwSmallFontWidth / 4,	// Frame Left Top Axis
+			// [iwad] (j / 3) * dwSmallFontHight * 8,
+			(j / DispMat) * dwSmallFontHight * 8 + 5,
+			dwSmallFontWidth * 21 + dwSmallFontWidth / 2,
+			dwSmallFontHight * 8);
 		}
 		if(dwToDoHalf)	// ToDo on Day Screen?
 			DrawToDo(hDC,
-				(j % 3) * 22 * dwSmallFontWidth + FrameWidth + dwSmallFontWidth / 4,	// Frame Left Top Axis
+				// [iwad] (j % 3) * 22 * dwSmallFontWidth + FrameWidth + dwSmallFontWidth / 4,
+				(j % DispMat) * 22 * dwSmallFontWidth + FrameWidth + dwSmallFontWidth / 4,	// Frame Left Top Axis
 				// [iwad] (j / 3) * dwSmallFontHight * 8,
-				(j / 3) * dwSmallFontHight * 8 + 5,
+				(j / DispMat) * dwSmallFontHight * 8 + 5,
 				dwSmallFontWidth * 21 + dwSmallFontWidth / 2,
 				dwSmallFontHight * 8);
 		dwOldCurX = 7;
@@ -552,14 +564,20 @@ ReWrite:
 //
 void ReverseHalfCalBox(HDC hDC, DWORD x, DWORD y)
 {
+DWORD	DispMat = 3; // [iwad] 縦画面モード時 (2)×3、横画面モード時 (3)×2
+// [iwad] 縦画面モード時は月表示を2×3にする
+	if (dwYsize > 500)
+	{
+		DispMat = 2;
+	}
 	if(y >= 30)
 		y -= 30;
 	else
 		y += 6;
 	PatBlt(hDC,
-			(((y / 6) % 3) * 22 + x * 3 + 1) * dwSmallFontWidth + FrameWidth - 1,
+			(((y / 6) % DispMat) * 22 + x * 3 + 1) * dwSmallFontWidth + FrameWidth - 1,
 			// [iwad] ((y / 18) * 8 + (y % 6) + 2) * dwSmallFontHight,
-			((y / 18) * 8 + (y % 6) + 2) * dwSmallFontHight + 5,	// 月の日にち タップ時の反転表示位置
+			((y / 6 / DispMat) * 8 + (y % 6) + 2) * dwSmallFontHight + 5,	// 月の日にち タップ時の反転表示位置
 			dwSmallFontWidth * 5 / 2 + 1,
 			dwSmallFontHight, PATINVERT);
 }
@@ -1020,28 +1038,66 @@ DWORD	CurX, CurY, Page;
 			CurX--;
 		CurX /= 3;
 		CurY = (HIWORD(lParam) - dwWinTop) / dwSmallFontHight;
-		if(CurY > 16)
-		{	// Blank Area
-			SendMessage(hWnd, WM_COMMAND, IDM_JUMP_DATE, 0);
-			return;
-		}
-		if(CurY < 8)
-		{	// Upper Part
-			if(CurX < 7)
-				Page = 5;
-			else if(CurX < 14)
-				Page = 0;
+
+		// [iwad] 縦画面モード時は月表示を2×3にする
+		if (dwYsize > 500)
+		{
+			if(CurY > 23)
+			{	// Blank Area
+				SendMessage(hWnd, WM_COMMAND, IDM_JUMP_DATE, 0);
+				return;
+			}
+			if(CurY < 8)
+			{	// Upper Part
+				if(CurX < 7)
+					Page = 5;
+				else
+					Page = 0;
+			}
+			else if(CurY < 16)
+			{	// Middle Part
+				if(CurX < 7)
+					Page = 1;
+				else
+					Page = 2;
+			}
 			else
-				Page = 1;
+			{	// Lower Part
+				if(CurX < 7)
+					Page = 3;
+				else
+					Page = 4;
+			}
+
+			if(CurY > 8)
+				CurY -= 8;
 		}
 		else
-		{	// Lower Part
-			if(CurX < 7)
-				Page = 2;
-			else if(CurX < 14)
-				Page = 3;
+		{
+			// [iwad] if(CurY > 16)
+			if(CurY > 15)	// さらに前の月が選択されてしまうバグ対策 2007.03.14
+			{	// Blank Area
+				SendMessage(hWnd, WM_COMMAND, IDM_JUMP_DATE, 0);
+				return;
+			}
+			if(CurY < 8)
+			{	// Upper Part
+				if(CurX < 7)
+					Page = 5;
+				else if(CurX < 14)
+					Page = 0;
+				else
+					Page = 1;
+			}
 			else
-				Page = 4;
+			{	// Lower Part
+				if(CurX < 7)
+					Page = 2;
+				else if(CurX < 14)
+					Page = 3;
+				else
+					Page = 4;
+			}
 		}
 		if(dwToDoHalf && Page == 4)
 			return;
@@ -1091,28 +1147,66 @@ DWORD	Page, CurX, CurY;
 			CurX--;
 		CurX /= 3;
 		CurY = (HIWORD(lParam) - dwWinTop) / dwSmallFontHight;
-		if(CurY > 16)
-		{	// Blank Area
-			SendMessage(hWnd, WM_COMMAND, IDM_JUMP_DATE, 0);
-			return;
-		}
-		if(CurY < 8)
-		{	// Upper Part
-			if(CurX < 7)
-				Page = 5;
-			else if(CurX < 14)
-				Page = 0;
+
+		// [iwad] 縦画面モード時は月表示を2×3にする
+		if (dwYsize > 500)
+		{
+			if(CurY > 23)
+			{	// Blank Area
+				SendMessage(hWnd, WM_COMMAND, IDM_JUMP_DATE, 0);
+				return;
+			}
+			if(CurY < 8)
+			{	// Upper Part
+				if(CurX < 7)
+					Page = 5;
+				else
+					Page = 0;
+			}
+			else if(CurY < 16)
+			{	// Middle Part
+				if(CurX < 7)
+					Page = 1;
+				else
+					Page = 2;
+			}
 			else
-				Page = 1;
+			{	// Lower Part
+				if(CurX < 7)
+					Page = 3;
+				else
+					Page = 4;
+			}
+
+			if(CurY > 8)
+				CurY -= 8;
 		}
 		else
-		{	// Lower Part
-			if(CurX < 7)
-				Page = 2;
-			else if(CurX < 14)
-				Page = 3;
+		{
+			// [iwad] if(CurY > 16)
+			if(CurY > 15)	// さらに前の月が選択されてしまうバグ対策 2007.03.14
+			{	// Blank Area
+				SendMessage(hWnd, WM_COMMAND, IDM_JUMP_DATE, 0);
+				return;
+			}
+			if(CurY < 8)
+			{	// Upper Part
+				if(CurX < 7)
+					Page = 5;
+				else if(CurX < 14)
+					Page = 0;
+				else
+					Page = 1;
+			}
 			else
-				Page = 4;
+			{	// Lower Part
+				if(CurX < 7)
+					Page = 2;
+				else if(CurX < 14)
+					Page = 3;
+				else
+					Page = 4;
+			}
 		}
 		if(CurY < 2 || CurY == 8 || CurY == 9)
 		{	// Click Month Name Part
