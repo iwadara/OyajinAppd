@@ -85,19 +85,19 @@ IDD_REPEATDLG DIALOG  0, 0, 135, 125
 STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP
 FONT 14, "System"
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,104,20,32,10,WS_GROUP
-    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,104,32,32,10
+    DEFPUSHBUTTON   "OK",IDOK,102,20,32,10,WS_GROUP
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,102,32,32,10
     CONTROL         "なし",IDC_NONE,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,3,6,28,10
     CONTROL         "日",IDC_DAILY,"Button",BS_AUTORADIOBUTTON,34,6,24,10
     CONTROL         "週",IDC_WEEKLY,"Button",BS_AUTORADIOBUTTON,60,6,24,10
     CONTROL         "月",IDC_MONTHLY,"Button",BS_AUTORADIOBUTTON,87,6,24,10
-    CONTROL         "年",IDC_YEARLY,"Button",BS_AUTORADIOBUTTON,112,6,24,10
-    GROUPBOX        "",IDC_STATIC,1,0,138,18,WS_GROUP
+    CONTROL         "年",IDC_YEARLY,"Button",BS_AUTORADIOBUTTON,112,6,20,10
+    GROUPBOX        "",IDC_STATIC,1,0,134,18,WS_GROUP
     LTEXT           "日毎",IDC_FREQTEXT,80,28,17,8
     EDITTEXT        IDC_FREQ,64,26,15,12,ES_AUTOHSCROLL | WS_GROUP
     GROUPBOX        "繰返し",IDC_STATIC,60,17,41,24,WS_GROUP
     CONTROL         "日付指定",IDC_BYDAY,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,61,45,52,10
-    EDITTEXT        IDC_DATE,114,44,26,12,ES_AUTOHSCROLL | WS_GROUP
+    EDITTEXT        IDC_DATE,113,44,21,12,ES_AUTOHSCROLL | WS_GROUP
     CONTROL         "&1週",IDC_1ST,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,5,62,28,10
     CONTROL         "&2週",IDC_2ND,"Button",BS_AUTOCHECKBOX,5,73,28,10
     CONTROL         "&3週",IDC_3RD,"Button",BS_AUTOCHECKBOX,5,84,28,10
@@ -111,18 +111,18 @@ BEGIN
     CONTROL         "木",IDC_THU,"Button",BS_AUTOCHECKBOX,66,62,24,10
     CONTROL         "金",IDC_FRI,"Button",BS_AUTOCHECKBOX,66,73,24,10
     CONTROL         "土",IDC_SAT,"Button",BS_AUTOCHECKBOX,66,84,24,10
-    CONTROL         "1",IDC_JAN,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,96,57,20,10
-    CONTROL         "2",IDC_FEB,"Button",BS_AUTOCHECKBOX,96,67,20,10
-    CONTROL         "3",IDC_MAR,"Button",BS_AUTOCHECKBOX,96,76,20,10
-    CONTROL         "4",IDC_APL,"Button",BS_AUTOCHECKBOX,96,86,20,10
-    CONTROL         "5",IDC_MAY,"Button",BS_AUTOCHECKBOX,96,96,20,10
-    CONTROL         "&6",IDC_JUN,"Button",BS_AUTOCHECKBOX,96,106,20,10
-    CONTROL         "&7",IDC_JUL,"Button",BS_AUTOCHECKBOX,117,57,20,10
-    CONTROL         "&8",IDC_AUG,"Button",BS_AUTOCHECKBOX,117,67,20,10
-    CONTROL         "&9",IDC_SEP,"Button",BS_AUTOCHECKBOX,117,76,20,10
-    CONTROL         "1&0",IDC_OCT,"Button",BS_AUTOCHECKBOX,117,86,24,10
-    CONTROL         "11",IDC_NOV,"Button",BS_AUTOCHECKBOX,117,96,24,10
-    CONTROL         "12",IDC_DEC,"Button",BS_AUTOCHECKBOX,117,106,24,10
+    CONTROL         "1",IDC_JAN,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,94,57,20,10
+    CONTROL         "2",IDC_FEB,"Button",BS_AUTOCHECKBOX,94,67,20,10
+    CONTROL         "3",IDC_MAR,"Button",BS_AUTOCHECKBOX,94,76,20,10
+    CONTROL         "4",IDC_APL,"Button",BS_AUTOCHECKBOX,94,86,20,10
+    CONTROL         "5",IDC_MAY,"Button",BS_AUTOCHECKBOX,94,96,20,10
+    CONTROL         "&6",IDC_JUN,"Button",BS_AUTOCHECKBOX,94,106,20,10
+    CONTROL         "&7",IDC_JUL,"Button",BS_AUTOCHECKBOX,114,57,20,10
+    CONTROL         "&8",IDC_AUG,"Button",BS_AUTOCHECKBOX,114,67,20,10
+    CONTROL         "&9",IDC_SEP,"Button",BS_AUTOCHECKBOX,114,76,20,10
+    CONTROL         "1&0",IDC_OCT,"Button",BS_AUTOCHECKBOX,114,86,24,10
+    CONTROL         "11",IDC_NOV,"Button",BS_AUTOCHECKBOX,114,96,24,10
+    CONTROL         "12",IDC_DEC,"Button",BS_AUTOCHECKBOX,114,106,24,10
     LTEXT           "開始",IDC_STATIC,3,27,17,8
     EDITTEXT        IDC_STARTDATE,20,25,36,12,ES_AUTOHSCROLL | WS_GROUP
     LTEXT           "終了",IDC_STATIC,3,40,17,8
@@ -259,7 +259,7 @@ BEGIN
     LTEXT           "場所:",IDC_STATIC,11,86,20,8
 END
 
-IDD_PROP_DEFAULTS DIALOG  0, 0, 135, 125
+IDD_PROP_DEFAULTS DIALOG  0, 0, 135, 113
 STYLE DS_SETFONT | DS_CONTROL | DS_CENTER | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "ﾒｲﾝ"
 FONT 14, "System"
@@ -377,7 +377,7 @@ BEGIN
     CTEXT           "",IDC_VERSION,13,68,112,18,SS_CENTERIMAGE
     CTEXT           "Oyajin Appointment Ver 0.99f\nCopyright(C)1998 Shinichi Nakamoto",IDC_STATIC,4,23,127,18
     CTEXT           "Oyajin Appointment Ver 0.99f-u01\n2001 Modified by 海人",IDC_STATIC,8,46,120,18
-    ICON            IDI_ICON1,IDC_STATIC,7,3,16,14
+    ICON            IDI_ICON1,IDC_STATIC,7,3,20,20
 END
 
 IDD_JUMPDLG DIALOG  0, 0, 131, 55
@@ -526,7 +526,6 @@ BEGIN
         MENUITEM "日表示ﾓｰﾄﾞ(&D)\tCtrl+D",         IDM_VIEW_DAY
         MENUITEM "半年表示ﾓｰﾄﾞ(&H)\tCtrl+H",        IDM_VIEW_HALFYEAR
         MENUITEM "ToDo表示ﾓｰﾄﾞ(&T)\tCtrl+T",      IDM_VIEW_TODO
-        MENUITEM "入力ﾓｰﾄﾞ(&I)\tEnter",           IDM_VIEW_INPUT
         MENUITEM SEPARATOR
         MENUITEM "ﾌﾟﾗｲﾍﾞｰﾄ(&P)\tCtrl+P",        IDM_VIEW_PRIVATE
         MENUITEM SEPARATOR
@@ -550,10 +549,6 @@ BEGIN
         END
         POPUP "編集(&E)"
         BEGIN
-            MENUITEM "ToDoの編集(&T)\tCtrl+Enter",     IDM_EDIT_TODO
-            MENUITEM "裏のｽｹｼﾞｭｰﾙ編集(&A)\tALT+Enter",  IDM_EDIT_ALT
-            MENUITEM "ﾒﾓの編集(&N)\tShift+Enter",      IDM_EDIT_FULL
-            MENUITEM SEPARATOR
             MENUITEM "削除(&D)\tDel",                 IDM_EDIT_DELETE
             MENUITEM "元に戻す(&U)\tCtrl+Z",            IDM_EDIT_UNDO
             MENUITEM SEPARATOR
@@ -563,8 +558,13 @@ BEGIN
         END
         POPUP "移動(&J)"
         BEGIN
-            MENUITEM "日付(&D)...\tCtrl+J",           IDM_JUMP_DATE
             MENUITEM "検索(&F)...\tCtrl+F",           IDM_JUMP_FIND
+            MENUITEM "日付(&D)...\tCtrl+J",           IDM_JUMP_DATE
+            MENUITEM SEPARATOR
+            MENUITEM "入力ﾓｰﾄﾞ(&I)\tEnter",           IDM_VIEW_INPUT
+            MENUITEM "ToDoの編集(&T)\tCtrl+Enter",     IDM_EDIT_TODO
+            MENUITEM "裏のｽｹｼﾞｭｰﾙ編集(&A)\tALT+Enter",  IDM_EDIT_ALT
+            MENUITEM "ﾒﾓの編集(&N)\tShift+Enter",      IDM_EDIT_FULL
         END
         MENUITEM SEPARATOR
         MENUITEM "終了(&X)",                      IDM_FILE_EXIT
@@ -717,6 +717,11 @@ BEGIN
         LEFTMARGIN, 7
         TOPMARGIN, 7
         BOTTOMMARGIN, 69
+    END
+
+    IDD_PROP_DEFAULTS, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 110
     END
 
     IDD_PROP_COLOR, DIALOG

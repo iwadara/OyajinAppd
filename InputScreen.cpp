@@ -203,7 +203,7 @@ DWORD	Style, FieldAttr;
 TCHAR	*ClassName = TEXT("");
 HWND	hWnd;
 TCHAR	String[256];
-	DestroyInputWindows();	// Clear Old Windows
+	//DestroyInputWindows();	// Clear Old Windows
 	for(fptr = MainWork.FieldList; fptr->Attr; fptr++)
 	{	// Repeat for All Field
 		FieldAttr = fptr->Attr;	// Get Attr
@@ -340,7 +340,7 @@ SetCaption:
 	0,								// Extra style
 	TEXT("BUTTON"),					// Class Name
 	TEXT("OK"),			// No Caption
-	WS_DISABLED | WS_CHILD | WS_GROUP | WS_TABSTOP | BS_DEFPUSHBUTTON,	// Window style
+	WS_DISABLED | WS_DISABLED | WS_GROUP | WS_TABSTOP | BS_DEFPUSHBUTTON,	// Window style
 	//215 * dwXsize / 256,
 	210 * dwXsize / 256,	// [iwad]
 	95 * dwYsize / 128 + dwWinTop,

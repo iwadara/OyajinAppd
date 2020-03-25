@@ -289,28 +289,32 @@ DWORD	dwGrayBUF;				// [iwad] 土日カラー対応 バッファ
 	CurrentTime = StartTime;			// Current Select Time
 	WeekCurY = dwTopWeekLine;			// Set Week Screen Cursor Y
 	GetToday();
-	BoxHight = (dwYsize - dwSmallFontHight * 2) / 5;	// Get DayBox Height
+	// [iwad] BoxHight = (dwYsize - dwSmallFontHight * 2) / 5;
+	BoxHight = (dwYsize - dwSmallFontHight * 2 - 2) / 5;	// Get DayBox Height
 	BoxWidth = (dwXsize / dwWeekWidth);	// Get DayBox Width
-	DayHight = dwYsize - BoxHight * 5;	// Get Height of Day	
+	DayHight = dwYsize - BoxHight * 5;
 	Lines = BoxHight / dwMidFontHight;	// Get Lines in the Box
 	if(Lines > 16)
 		Lines = 16;	// Max Disp Line = 16
-	LinePoint[0].y = dwSmallFontHight;	// 1st Line
+	// [iwad] LinePoint[0].y = dwSmallFontHight;
+	LinePoint[0].y = dwSmallFontHight + 2;	// 1st Line
 	LinePoint[1].y = dwYsize - 1;	// 1st Line
 	DispYear = MonthBuf[0][15][0];	// Get Center Year
 	DispMonth = MonthBuf[0][15][1];	// Get Center Month
 	// [iwad] txRect.top = 0;
-	txRect.top = 2;
+	txRect.top = 3;
 	// [iwad] txRect.bottom = dwSmallFontHight;
-	txRect.bottom = dwSmallFontHight + 2;
+	txRect.bottom = dwSmallFontHight + 3;
 	txRect.left = 0;
 	txRect.right = BoxWidth * 7 + 1;
 	wsprintf(TempStr, TEXT("%s %d (%d / %d)"), 
 		MonthName[DispMonth - 1], DispYear, DispYear, DispMonth);
 	DrawText(hDC, TempStr, -1, &txRect, DT_CENTER | DT_VCENTER);
 	if(dwPrivate)
-		PatBlt(hDC, 0, 0, BoxWidth * 7 + 1, dwSmallFontHight, PATINVERT);
-	txRect.top = dwSmallFontHight;
+		// [iwad] PatBlt(hDC, 0, 0, BoxWidth * 7 + 1, dwSmallFontHight, PATINVERT);
+		PatBlt(hDC, 0, 0, BoxWidth * 7 + 1, dwSmallFontHight + 2, PATINVERT);
+	// [iwad] txRect.top = dwSmallFontHight;
+	txRect.top = dwSmallFontHight + 3;
 	txRect.bottom = DayHight;
 	for(i = 0; i < dwWeekWidth + 1; i++)	// Repeat for Row (Vertical line)
 	{
@@ -361,7 +365,8 @@ DWORD	dwGrayBUF;				// [iwad] 土日カラー対応 バッファ
 		LinePoint[1].y = LinePoint[0].y;	// 1st Line
 		Polyline(hDC, LinePoint, 2);	// Draw
 	}
-	LinePoint[0].y = dwSmallFontHight;	// 1st Line
+	// [iwad] LinePoint[0].y = dwSmallFontHight;
+	LinePoint[0].y = dwSmallFontHight + 2;	// 1st Line
 	LinePoint[1].y = LinePoint[0].y;	// 1st Line
 	Polyline(hDC, LinePoint, 2);	// Draw Top Line
 	for(i = 0; i < 35; i++)	// Repeat
