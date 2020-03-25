@@ -132,8 +132,8 @@ TCHAR	TempStr[256];// Title Buffer
 	LinePoint[0].y = LinePoint[1].y = dwSmallFontHight + 1;
 	Polyline(hDC, LinePoint, 2);	// Draw Todays Line
 	SelectObject(hDC, hSmallFont);		// Set Font (Small)
-	// [iwad] txRect.top = 1;
-	txRect.top = 2;
+	// txRect.top = 1;
+	txRect.top = 2;	// [iwad]
 	txRect.bottom = dwSmallFontHight ;
 	txRect.left = 1;
 	txRect.right = FrameWidth - 2;
@@ -413,6 +413,8 @@ DispAgain:
 			txRect.bottom = txRect.top + LineHight;
 			if(DayGenID[0][i + AllStartIndex])
 			{
+				DWORD	BkColorBuf = 0xCCCC66;	// [iwad] 全日表示はカラー背景(色:ナイルブルー)
+
 				_tcscpy(TempStr, TEXT(""));
 				if(
 				(AllDayHight < DayAllNum[0])
@@ -425,7 +427,11 @@ DispAgain:
 				if(DayToDo[i + AllStartIndex])
 					_tcscat(TempStr, TEXT("!"));
 				_tcscat(TempStr, DayTitle[0][i + AllStartIndex]);
+				// [iwad] 全日表示はカラー背景
+				BkColorBuf = SetBkColor(hDC, BkColorBuf);
 				DrawText(hDC, TempStr, -1, &txRect, DT_LEFT | DT_VCENTER | DT_NOPREFIX);
+				SetBkColor(hDC, BkColorBuf);
+				//DrawText(hDC, TempStr, -1, &txRect, DT_LEFT | DT_VCENTER | DT_NOPREFIX);
 			}
 			DayOrgIDBuf[i] = DayGenID[0][i + AllStartIndex];	// Clear Current Line Seek Ptr
 			DayOrgAllDayBuf[i] = DayAllDay[0][i + AllStartIndex];	// Save Original AllDay Flag

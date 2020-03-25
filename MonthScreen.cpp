@@ -277,8 +277,6 @@ DWORD	DispYear, DispMonth;
 BOOL	GrayMode;
 BOOL	GrayDisp;
 TCHAR	LineText[16][64 + 4];// Schedule Text Buffer
-
-extern	DWORD	LTGRAYCOLOR;	// [iwad] 土日カラー対応
 DWORD	LTGRAYBUF;				// [iwad] 土日カラー対応 バッファ
 DWORD	dwGrayBUF;				// [iwad] 土日カラー対応 バッファ
 #define	LTGRAY_SAT	0xFFCCCC	// [iwad] 土日カラー対応 土曜色

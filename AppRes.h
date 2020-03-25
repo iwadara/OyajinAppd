@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by AppRes.rc
 //
 #define IDR_MENU1                       101
@@ -99,7 +99,9 @@
 #define IDC_ALARMTIME                   1066
 #define IDC_EXECNAME                    1067
 #define IDC_VOLUME                      1068
+#define IDC_LEFTKEY_DEF                 1068
 #define IDC_CONFIRM                     1069
+#define IDC_LEFTKEY_OPEN                1069
 #define IDC_NOTIFYNAME                  1070
 #define IDC_ALARMTITLE                  1071
 #define IDC_5MIN                        1072
@@ -164,8 +166,11 @@
 #define IDC_TODOSORT                    1131
 #define IDC_POPUP                       1132
 #define IDC_BUTTON1                     1137
-#define IDM_BUTTON1                     32778	// [iwad]
-#define IDM_BUTTON2                     32779	// [iwad]
+#define IDC_BUTTON2                     1138
+#define IDC_RIGHTKEY_DEF                1139
+#define IDC_RIGHTKEY_OPEN               1140
+#define IDM_BUTTON1                     32778
+#define IDM_BUTTON2                     32779
 #define IDM_FILE_NEW                    40001
 #define IDM_FILE_OPEN                   40002
 #define IDM_FILE_COPY                   40003

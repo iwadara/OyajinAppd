@@ -1579,6 +1579,14 @@
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl"
 			>
+			<File
+				RelativePath=".\AppRes.h"
+				>
+			</File>
+			<File
+				RelativePath=".\external.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

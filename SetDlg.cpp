@@ -31,6 +31,7 @@ static BOOL	CALLBACK OptionAlarmProc(HWND, UINT, WPARAM, LPARAM);
 static BOOL	CALLBACK OptionToDoProc(HWND, UINT, WPARAM, LPARAM);
 static BOOL	CALLBACK OptionDirProc(HWND, UINT, WPARAM, LPARAM);
 static BOOL	CALLBACK OptionColorProc(HWND, UINT, WPARAM, LPARAM);
+static BOOL CALLBACK OptionAboutProc(HWND, UINT, WPARAM, LPARAM);
 static void ClearComboList(HWND, DWORD);
 void	SetupBrush(HDC);
 //
@@ -111,8 +112,7 @@ PROPSHEETHEADER	PageHeader;
 	Page[9].dwSize = sizeof(PROPSHEETPAGE);
 	Page[9].hInstance = hInst;
 	Page[9].pszTemplate = MAKEINTRESOURCE(IDD_ABOUTDLG);
-	//iwad Aboutアクションを無効にするv0.33
-	//Page[9].pfnDlgProc = OptionActionProc;
+	Page[9].pfnDlgProc = OptionAboutProc;
 //	Page Headder
 	PageHeader.dwSize = sizeof(PROPSHEETHEADER);
 	PageHeader.hInstance = hInst;
@@ -471,6 +471,10 @@ OPENFILENAME	FN;	// File Open Structure
 	case WM_INITDIALOG:
 //	Set Edit Box
 		SetDlgItemText(hDlg, IDC_EXECNAME, szExecFileName);
+		SetDlgItemText(hDlg, IDC_LEFTKEY_DEF, szDefNameL);		// [iwad]
+		SetDlgItemText(hDlg, IDC_LEFTKEY_OPEN, szOpenNameL);	// [iwad]
+		SetDlgItemText(hDlg, IDC_RIGHTKEY_DEF, szDefNameR);		// [iwad]
+		SetDlgItemText(hDlg, IDC_RIGHTKEY_OPEN, szOpenNameR);	// [iwad]
 #ifndef	_WIN32_WCE
 		SetDlgItemText(hDlg, IDC_NOTIFYNAME, szNotifyFileName);
 #endif
@@ -483,6 +487,10 @@ OPENFILENAME	FN;	// File Open Structure
 			{
 			case PSN_APPLY:
 				GetDlgItemText(hDlg, IDC_EXECNAME, szExecFileName, MAX_PATH - 1);
+				GetDlgItemText(hDlg, IDC_LEFTKEY_DEF, szDefNameL, MAX_PATH - 1);	// [iwad]
+				GetDlgItemText(hDlg, IDC_LEFTKEY_OPEN, szOpenNameL, MAX_PATH - 1);	// [iwad]
+				GetDlgItemText(hDlg, IDC_RIGHTKEY_DEF, szDefNameR, MAX_PATH - 1);	// [iwad]
+				GetDlgItemText(hDlg, IDC_RIGHTKEY_OPEN, szOpenNameR, MAX_PATH - 1);	// [iwad]
 #ifndef	_WIN32_WCE
 				GetDlgItemText(hDlg, IDC_NOTIFYNAME, szNotifyFileName, MAX_PATH - 1);
 #endif
@@ -514,6 +522,14 @@ Browse:
 			{
 				_tcscpy(szExecFileName, FullFileName);// Save Current Name
 				SetDlgItemText(hDlg, IDC_EXECNAME, FullFileName);
+				_tcscpy(szDefNameL, FullFileName);// Save Current Name
+				SetDlgItemText(hDlg, IDC_LEFTKEY_DEF, FullFileName);	// [iwad]
+				_tcscpy(szOpenNameL, FullFileName);// Save Current Name
+				SetDlgItemText(hDlg, IDC_LEFTKEY_OPEN, FullFileName);	// [iwad]
+				_tcscpy(szDefNameR, FullFileName);// Save Current Name
+				SetDlgItemText(hDlg, IDC_RIGHTKEY_DEF, FullFileName);	// [iwad]
+				_tcscpy(szOpenNameR, FullFileName);// Save Current Name
+				SetDlgItemText(hDlg, IDC_RIGHTKEY_OPEN, FullFileName);	// [iwad]
 			}
 #ifndef	_WIN32_WCE
 			else
@@ -836,3 +852,22 @@ TCHAR	ValuePtr[16];
 	}
 	return FALSE;
 }
+//
+//	[iwad] About Proc - アバウトのバージョン情報の表示
+//
+static BOOL CALLBACK OptionAboutProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	TCHAR		szVerBuf[64];	// [iwad] Buffer for szVerNum
+
+	switch(message)
+	{
+//	Init About DialogBox
+	case WM_INITDIALOG:
+//	Setup Version Number
+		wsprintf(szVerBuf, TEXT("Oyajin Appd Ver %s\n2007 Modified by いわだら"), szVerNum);
+		SetDlgItemText(hDlg, IDC_VERSION, szVerBuf);
+		return TRUE;
+	}
+	return FALSE;
+}
+

@@ -234,15 +234,15 @@ SHRGINFO RGesture;	// [iwad] タップ&ホールドメニュー用
 		// [iwad] タップ&ホールドメニュー表示 ここから
 		RGesture.dwFlags = SHRG_RETURNCMD;
 		RGesture.cbSize  = sizeof(SHRGINFO);
-		RGesture.hwndClient = hWnd; //タップアンドホールドメニューをつけたいウインドウのハンドル
-		RGesture.ptDown.x = LOWORD( lParam );	//タップされた位置のＸ座標です
-		RGesture.ptDown.y = HIWORD( lParam );	//タップされた位置のＹ座標です
+		RGesture.hwndClient = hWnd; // [iwad] タップアンドホールドメニューをつけたいウインドウのハンドル
+		RGesture.ptDown.x = LOWORD( lParam );	// [iwad] タップされた位置のX座標
+		RGesture.ptDown.y = HIWORD( lParam );	// [iwad] タップされた位置のY座標
 		if( SHRecognizeGesture(&RGesture) == GN_CONTEXTMENU ) {
 			//MainRButtonProc(hWnd, hMemDC, wParam, lParam);
 			HMENU		hPopMenu;
 			HMENU		hWorkMenu;
-			hWorkMenu = LoadMenu(hInst,MAKEINTRESOURCE(IDM_MAIN_MENU));	//リソースID IDM_MAIN_MENUのメニューをロード
-			hPopMenu  = GetSubMenu(hWorkMenu, 2);	// 2番目のサブメニューを選択
+			hWorkMenu = LoadMenu(hInst,MAKEINTRESOURCE(IDM_MAIN_MENU));	// [iwad] リソースID IDM_MAIN_MENUのメニューをロード
+			hPopMenu  = GetSubMenu(hWorkMenu, 2);	// [iwad] 2番目のサブメニューを選択
 			//フローティングポップアップメニューを表示し項目選択を追跡します
 			//項目が選択されるとWM_COMMANDメッセージのwParamのLOWORDに
 			//選択されたメニューIDが戻ります
@@ -754,30 +754,34 @@ HideScreen:
 //
 BOOL CALLBACK AboutDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
-TCHAR		szVerBuf[64];			// Buffer for szVerNum
-	switch(message)
-	{
-//	Init About DialogBox
-	case WM_INITDIALOG:
-		// [iwad] wsprintf(szVerBuf, TEXT("Oyajin Appointment Ver %s"), szVerNum);
-		wsprintf(szVerBuf, TEXT("Oyajin Appd Ver %s"), szVerNum);
-		SetDlgItemText(hDlg, IDC_VERSION, szVerBuf);
-		return TRUE;
-//	Ok Button
-	case WM_COMMAND:
-		switch (GET_WM_COMMAND_ID(wParam, lParam))
+// [iwad] Aboutダイアログはオプションに吸収合併したため、除外する
+#if 0
+	TCHAR		szVerBuf[64];			// Buffer for szVerNum
+		switch(message)
 		{
-		case IDCANCEL:
-		case IDOK:
-			EndDialog(hDlg, TRUE);
+	//	Init About DialogBox
+		case WM_INITDIALOG:
+			// [iwad] wsprintf(szVerBuf, TEXT("Oyajin Appointment Ver %s"), szVerNum);
+			wsprintf(szVerBuf, TEXT("Oyajin Appd Ver %s"), szVerNum);
+			SetDlgItemText(hDlg, IDC_VERSION, szVerBuf);
+			return TRUE;
+	//	Ok Button
+		case WM_COMMAND:
+			switch (GET_WM_COMMAND_ID(wParam, lParam))
+			{
+			case IDCANCEL:
+			case IDOK:
+				EndDialog(hDlg, TRUE);
+				return TRUE;
+			}
+			break;
+	//	X Button
+		case WM_CLOSE:
+			EndDialog(hDlg, FALSE);
 			return TRUE;
 		}
-		break;
-//	X Button
-	case WM_CLOSE:
-		EndDialog(hDlg, FALSE);
-		return TRUE;
-	}
+#endif
+
 	return FALSE;
 }
 //

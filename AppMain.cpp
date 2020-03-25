@@ -28,7 +28,9 @@
 //
 LRESULT	CALLBACK	WindowProc(HWND, UINT, WPARAM, LPARAM);
 BOOL 	SetupRegistry(void);
+BOOL 	SetupRegistry2(void);	// [iwad] Todayソフトキー対応
 BOOL 	SaveRegistry(void);
+BOOL 	SaveRegistry2(void);	// [iwad] Todayソフトキー対応
 void	OyajiFileClose(FILEWORKS *);
 static	BOOL	InitApplication(void);
 static	BOOL	InitInstance(int);
@@ -86,6 +88,7 @@ HWND	hWndPrev;
 #endif
 //	Read Data from Registry
 	SetupRegistry();
+	SetupRegistry2();	// [iwad] Todayソフトキー対応
 //	Register Window Class
 	if(InitApplication() == FALSE)
 		return FALSE;	// Fail to register Class
@@ -113,6 +116,7 @@ HWND	hWndPrev;
 #endif
 //	Save Registry
 	SaveRegistry();		// Save Registry
+	SaveRegistry2();	// [iwad] Todayソフトキー対応
 	CleanUp();	// CleanUp Reserverd Memorys
 	return msg.wParam;
 }// End of WinMain

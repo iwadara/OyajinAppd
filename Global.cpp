@@ -27,7 +27,7 @@
 LPCTSTR		szHelpFileName =	TEXT("APPHELP.HLP");// Help FileName
 LPCTSTR		szRegName =			TEXT("Software\\Oyajin\\Appointment");
 LPCTSTR		szWinName =			TEXT("OyajinApo");	// Class name
-LPCTSTR		szVerNum =			TEXT("0.34");		// szVerNum Number TEXT	[iwad]
+LPCTSTR		szVerNum =			TEXT("0.35");		// szVerNum Number TEXT	[iwad]
 //LPCTSTR		szVerNum =			TEXT("0.99f-u01");		// szVerNum Number TEXT	by uminchu
 //LPCTSTR		szVerNum =			TEXT("0.99f");		// szVerNum Number TEXT
 
@@ -118,6 +118,10 @@ DWORD		dwWeekSync = 1;		// Week Sync other Day
 DWORD		dwWeekFloat = 1;	// Week Time Line floating Time
 DWORD		dwDateFormat;	// English Format Flag [iwad] USA OFF
 TCHAR		szExecFileName[MAX_PATH];// Current FileName Buffer
+TCHAR		szDefNameL[MAX_PATH];	// [iwad] 左ソフトキー対応
+TCHAR		szOpenNameL[MAX_PATH];	// [iwad] 左ソフトキー対応
+TCHAR		szDefNameR[MAX_PATH];	// [iwad] 右ソフトキー対応
+TCHAR		szOpenNameR[MAX_PATH];	// [iwad] 右ソフトキー対応
 #ifndef	_WIN32_WCE
 TCHAR		szNotifyFileName[MAX_PATH];// Current FileName Buffer
 #endif
@@ -592,6 +596,15 @@ LPCTSTR		RegTable[][4] = {
 	TEXT("SmallFontName"),(TCHAR *)0,szSmallFontName,	TEXT("ＭＳ Ｐゴシック"),	// [iwad]
 	TEXT("AlarmText"),	(TCHAR *)0,	AlarmTitle,			TEXT(""),
 	TEXT("FindText"),	(TCHAR *)0,	szFindText,			TEXT(""),
+	NULL, NULL, NULL, NULL
+};
+
+// [iwad] 左ソフトキー対応
+LPCTSTR		RegTable2[][4] = {
+	TEXT("Default"),(TCHAR *)0,	szDefNameL,		TEXT(""),
+	TEXT("Open"),(TCHAR *)0,	szOpenNameL,	TEXT(""),
+	TEXT("Default"),(TCHAR *)0,	szDefNameR,		TEXT(""),
+	TEXT("Open"),(TCHAR *)0,	szOpenNameR,	TEXT(""),
 	NULL, NULL, NULL, NULL
 };
 

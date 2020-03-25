@@ -243,9 +243,20 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_CONTROL | DS_CENTER | WS_POPUP | WS_CAPTIO
 CAPTION "ﾊﾟｽ"
 FONT 14, "System"
 BEGIN
-    EDITTEXT        IDC_EXECNAME,6,22,91,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "参照(&B)",IDC_BROWSEEXEC,99,22,30,12
-    GROUPBOX        "Oyajin Appd(appd.exe)の場所",-1,3,10,130,29,WS_GROUP
+    EDITTEXT        IDC_EXECNAME,6,11,91,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "参照(&B)",IDC_BROWSEEXEC,99,11,30,12
+    GROUPBOX        "Oyajin Appd(appd.exe)の場所",IDC_STATIC,3,1,130,25,WS_GROUP
+    EDITTEXT        IDC_LEFTKEY_DEF,32,36,61,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LEFTKEY_OPEN,32,49,91,12,ES_AUTOHSCROLL
+    LTEXT           "Today 左ｿﾌﾄｷｰ(※)",IDC_STATIC,5,27,65,8
+    LTEXT           "※設定後は再起動が必要です.\nW-ZERO3で左ｿﾌﾄｷｰを有効にするには\nKOTETU Battery Monitorが必要です.",IDC_STATIC,2,98,133,25
+    LTEXT           "表示:",IDC_STATIC,11,38,20,8
+    LTEXT           "場所:",IDC_STATIC,11,50,20,8
+    EDITTEXT        IDC_RIGHTKEY_DEF,32,72,61,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RIGHTKEY_OPEN,32,85,91,12,ES_AUTOHSCROLL
+    LTEXT           "Today 右ｿﾌﾄｷｰ(※)",IDC_STATIC,5,63,65,8
+    LTEXT           "表示:",IDC_STATIC,11,74,20,8
+    LTEXT           "場所:",IDC_STATIC,11,86,20,8
 END
 
 IDD_PROP_DEFAULTS DIALOG  0, 0, 135, 125
@@ -363,11 +374,10 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION
 CAPTION "About"
 FONT 14, "System"
 BEGIN
-    CTEXT           "",IDC_VERSION,3,4,131,8,SS_CENTERIMAGE
-    CTEXT           "Oyajin Appointment Ver 0.99f\nCopyright(C)1998 Shinichi Nakamoto",IDC_STATIC,2,17,131,18
-    CTEXT           "Oyajin Appointment Ver 0.99f-u01\n2001 Modified by 海人",IDC_STATIC,2,42,131,18
-    CTEXT           "Oyajin Appd Ver 0.34\n2007 Modified by いわだら",IDC_STATIC,21,66,94,17
-    ICON            IDI_ICON1,IDC_STATIC,2,65,16,14
+    CTEXT           "",IDC_VERSION,13,85,112,18,SS_CENTERIMAGE
+    CTEXT           "Oyajin Appointment Ver 0.99f\nCopyright(C)1998 Shinichi Nakamoto",IDC_STATIC,4,26,127,18
+    CTEXT           "Oyajin Appointment Ver 0.99f-u01\n2001 Modified by 海人",IDC_STATIC,8,56,120,18
+    ICON            IDI_ICON1,IDC_STATIC,7,5,16,14
 END
 
 IDD_JUMPDLG DIALOG  0, 0, 131, 55
@@ -420,15 +430,15 @@ BEGIN
     PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,77,32,28,14,WS_GROUP
 END
 
-IDD_ALARMDLG DIALOG  0, 0, 141, 54
+IDD_ALARMDLG DIALOG  0, 0, 124, 45
 STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION
 CAPTION "Appd ｱﾗｰﾑ"
 FONT 14, "System"
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,7,35,40,14
-    PUSHBUTTON      "5 分",IDC_5MIN,49,35,40,14
-    PUSHBUTTON      "",IDC_CUSTOM,91,35,40,15
-    CTEXT           "",IDC_ALARMTITLE,3,10,129,15
+    DEFPUSHBUTTON   "OK",IDOK,7,26,33,14
+    PUSHBUTTON      "5 分",IDC_5MIN,46,26,33,14
+    PUSHBUTTON      "",IDC_CUSTOM,86,26,33,14
+    CTEXT           "",IDC_ALARMTITLE,1,4,123,18
 END
 
 
@@ -491,7 +501,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "ﾌﾟﾗｲﾍﾞｰﾄ(&P)\tCtrl+P",        IDM_VIEW_PRIVATE
         MENUITEM SEPARATOR
-        MENUITEM "ｵﾌﾟｼｮﾝ(&O)...",               IDM_VIEW_OPTION
+        MENUITEM "ｵﾌﾟｼｮﾝ(&O)...\tCtrl+A",       IDM_VIEW_OPTION
     END
     POPUP "移動(&J)"
     BEGIN
@@ -503,7 +513,7 @@ BEGIN
     BEGIN
         MENUITEM "ｲﾝﾃﾞｯｸｽ(&I)...",              IDM_HELP_TOPIC
         MENUITEM SEPARATOR
-        MENUITEM "Appointmentについて(&A)...\tCtrl+A", IDM_HELP_ABOUT
+        MENUITEM "Appdについて(&A)...",             IDM_HELP_ABOUT
     END
 END
 
@@ -520,7 +530,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "ﾌﾟﾗｲﾍﾞｰﾄ(&P)\tCtrl+P",        IDM_VIEW_PRIVATE
         MENUITEM SEPARATOR
-        MENUITEM "ｵﾌﾟｼｮﾝ(&O)...",               IDM_VIEW_OPTION
+        MENUITEM "ｵﾌﾟｼｮﾝ(&O)...\tCtrl+A",       IDM_VIEW_OPTION
     END
     POPUP "左メニュー"
     BEGIN
@@ -566,7 +576,6 @@ BEGIN
         MENUITEM "貼り付け(&P)\tCtrl+V",            IDM_EDIT_PASTE
         MENUITEM SEPARATOR
         MENUITEM "削除(&D)\tDel",                 IDM_EDIT_DELETE
-        MENUITEM "元に戻す(&U)\tCtrl+Z",            IDM_EDIT_UNDO
     END
     POPUP "保留メニュー"
     BEGIN
@@ -630,7 +639,7 @@ BEGIN
             MENUITEM "検索(&F)...\tCtrl+F",           IDM_JUMP_FIND
         END
         MENUITEM SEPARATOR
-        MENUITEM "ｵﾌﾟｼｮﾝ(&O)...",               IDM_VIEW_OPTION
+        MENUITEM "ｵﾌﾟｼｮﾝ(&O)...\tCtrl+A",       IDM_VIEW_OPTION
     END
 END
 
@@ -728,7 +737,7 @@ BEGIN
         LEFTMARGIN, 3
         RIGHTMARGIN, 134
         TOPMARGIN, 3
-        BOTTOMMARGIN, 114
+        BOTTOMMARGIN, 118
     END
 
     IDD_JUMPDLG, DIALOG
@@ -756,10 +765,9 @@ BEGIN
 
     IDD_ALARMDLG, DIALOG
     BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 134
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 50
+        LEFTMARGIN, 1
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 43
     END
 END
 #endif    // APSTUDIO_INVOKED
