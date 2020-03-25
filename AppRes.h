@@ -103,9 +103,7 @@
 #define IDC_ALARMTIME                   1066
 #define IDC_EXECNAME                    1067
 #define IDC_VOLUME                      1068
-#define IDC_LEFTKEY_DEF                 1068
 #define IDC_CONFIRM                     1069
-#define IDC_LEFTKEY_OPEN                1069
 #define IDC_NOTIFYNAME                  1070
 #define IDC_ALARMTITLE                  1071
 #define IDC_5MIN                        1072
@@ -169,10 +167,9 @@
 #define IDC_LINEBLUE                    1130
 #define IDC_TODOSORT                    1131
 #define IDC_POPUP                       1132
+#define IDC_ADDINMENU					1133
 #define IDC_BUTTON1                     1137
 #define IDC_BUTTON2                     1138
-#define IDC_RIGHTKEY_DEF                1139
-#define IDC_RIGHTKEY_OPEN               1140
 #define IDM_BUTTON1                     32778
 #define IDM_BUTTON2                     32779
 #define IDM_FILE_NEW                    40001
@@ -208,6 +205,7 @@
 #define IDM_FILE_WRITE                  40031
 #define IDM_FILE_INSERT                 40032
 #define IDM_FILE_SYNC                   40033
+#define IDM_FILE_ADDIN                  40034
 
 // Next default values for new objects
 // 
@@ -215,7 +213,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        123
-#define _APS_NEXT_COMMAND_VALUE         40038
+#define _APS_NEXT_COMMAND_VALUE         40041
 #define _APS_NEXT_CONTROL_VALUE         1138
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

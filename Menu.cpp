@@ -330,6 +330,16 @@ BOOL SetMenuBar(UINT iRes)
 		MenuBarRes = iRes;	// [iwad] ソフトキー状態の保持(Global)
 	}
 
+	// [iwad] 拡張メニューの表示(dwAddinMenuがONならば[拡張ﾒﾆｭｰ]を追加)
+	if ( ( dwAddinMenu ) && ( iRes == IDR_MENUBAR1 ) )
+	{
+		HMENU hMenu;	// [iwad] スクリプトメニュー用
+
+		hMenu = (HMENU)SendMessage(hTB, SHCMBM_GETSUBMENU, 0, IDM_BUTTON2);
+		InsertMenu(hMenu, 3, MF_BYPOSITION, IDM_FILE_ADDIN, L"拡張ﾒﾆｭｰ(&N)" ); 
+		DrawMenuBar(hTB);
+	}
+
 	return 0;
 }
 //
@@ -345,7 +355,7 @@ DWORD	i, j;
 		return;
 #ifdef	_WIN32_WCE
 	// [iwad] メニューバーのセット(縦横切替対応のため、現在のソフトキー状態を判断)
-	if (MenuBarRes == IDR_MENUBAR2)
+	if( MenuBarRes == IDR_MENUBAR2 )
 		SetMenuBar(IDR_MENUBAR2);
 	else
 		SetMenuBar(IDR_MENUBAR1);

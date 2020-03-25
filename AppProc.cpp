@@ -14,6 +14,7 @@
 #include	"AppRes.h"
 #include	"External.h"
 #include	"aygshell.h"	// [iwad] タップ&ホールドメニュー用
+
 //	For Alarm
 #ifdef		_WIN32_WCE
 #include	<Notify.h>
@@ -373,6 +374,31 @@ SHRGINFO RGesture;	// [iwad] タップ&ホールドメニュー用
 		case IDM_FILE_WRITE:
 			WriteTextToFile(hWnd);
 			break ;
+//	[iwad] ADDIN
+		case IDM_FILE_ADDIN:
+			SHELLEXECUTEINFO sei;
+			TCHAR AddinFilePath[MAX_PATH];
+			TCHAR *SearchText;
+			TCHAR *szChangePoint;
+			int i;
+
+			// szExecFileName から実行ファイルパスを抽出する
+			_tcscpy(AddinFilePath, szExecFileName);
+			SearchText = _T("appd.exe");
+			szChangePoint = _tcsstr(AddinFilePath, SearchText);
+			// 置換位置の抽出
+			i = _tcslen( szChangePoint );
+			// 置換文字列の前でカット
+			AddinFilePath[_tcslen(AddinFilePath) - i] = '\0';
+			// 拡張メニュースクリプトの文字列結合
+			_tcscat(AddinFilePath, _T("appdscript.mscr"));
+
+			ZeroMemory(&sei, sizeof(SHELLEXECUTEINFO));
+			sei.cbSize = sizeof(SHELLEXECUTEINFO);
+			sei.lpVerb = _T("Open");
+			sei.lpFile = AddinFilePath;
+			ShellExecuteEx(&sei);
+			break;
 #ifdef	_SYNC
 //	Sync File
 		case IDM_FILE_SYNC:

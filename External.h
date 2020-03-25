@@ -103,6 +103,7 @@ extern	DWORD		dwToDoSort;		// ToDo Time Sort Flag
 extern	DWORD		dwToDoPopUp;		// ToDo Time Sort Flag
 extern	DWORD		dwHolyDay;		// WeekDay of Gray
 extern	DWORD		dwDateFormat;	// English Format Flag
+extern	DWORD		dwAddinMenu;	// [iwad] ägí£ÉÅÉjÉÖÅ[óp
 extern	TCHAR		szExecFileName[];// Current FileName Buffer
 #ifndef	_WIN32_WCE
 extern	TCHAR		szNotifyFileName[];// Current FileName Buffer
@@ -247,3 +248,5 @@ extern	LPCTSTR		ShortDayName[7];	// Short WeekDay Name
 extern	LPCTSTR		ShortMonthStr[12];	// Short Month Name
 extern	LPCTSTR		RepeatName[5];	// Repeat Status String
 extern	LPCTSTR		WeekPosName[5];	// Week Pos Name (1st, 2nd..)
+// [iwad] Input Screen
+extern	DWORD		LTGRAYCOLOR;

@@ -54,25 +54,26 @@ END
 
 IDR_ACCELERATOR1 ACCELERATORS 
 BEGIN
-    "A",            IDM_VIEW_OPTION,        VIRTKEY, CONTROL, NOINVERT
-    "D",            IDM_VIEW_DAY,           VIRTKEY, CONTROL, NOINVERT
-    "F",            IDM_JUMP_FIND,          VIRTKEY, CONTROL, NOINVERT
-    "H",            IDM_VIEW_HALFYEAR,      VIRTKEY, CONTROL, NOINVERT
-    "I",            IDM_VIEW_INPUT,         VIRTKEY, CONTROL, NOINVERT
-    "J",            IDM_JUMP_DATE,          VIRTKEY, CONTROL, NOINVERT
-    "M",            IDM_VIEW_MONTH,         VIRTKEY, CONTROL, NOINVERT
-    "N",            IDM_VIEW_MINIMIZE,      VIRTKEY, CONTROL, NOINVERT
-    "O",            IDM_FILE_OPEN,          VIRTKEY, CONTROL, NOINVERT
-    "P",            IDM_VIEW_PRIVATE,       VIRTKEY, CONTROL, NOINVERT
-    "S",            IDM_FILE_WRITE,         VIRTKEY, CONTROL, NOINVERT
-    "T",            IDM_VIEW_TODO,          VIRTKEY, CONTROL, NOINVERT
-    VK_DELETE,      IDM_EDIT_DELETE,        VIRTKEY, NOINVERT
-    VK_RETURN,      IDM_EDIT_TODO,          VIRTKEY, CONTROL, NOINVERT
     VK_RETURN,      IDM_EDIT_ALT,           VIRTKEY, ALT, NOINVERT
     VK_RETURN,      IDM_EDIT_ALT,           VIRTKEY, SHIFT, CONTROL, NOINVERT
+    VK_DELETE,      IDM_EDIT_DELETE,        VIRTKEY, NOINVERT
     VK_RETURN,      IDM_EDIT_FULL,          VIRTKEY, SHIFT, NOINVERT
-    "W",            IDM_VIEW_WEEK,          VIRTKEY, CONTROL, NOINVERT
+    VK_RETURN,      IDM_EDIT_TODO,          VIRTKEY, CONTROL, NOINVERT
+    "N",            IDM_FILE_ADDIN,         VIRTKEY, CONTROL, NOINVERT
     "Y",            IDM_FILE_INSERT,        VIRTKEY, CONTROL, NOINVERT
+    "O",            IDM_FILE_OPEN,          VIRTKEY, CONTROL, NOINVERT
+    "S",            IDM_FILE_WRITE,         VIRTKEY, CONTROL, NOINVERT
+    "J",            IDM_JUMP_DATE,          VIRTKEY, CONTROL, NOINVERT
+    "F",            IDM_JUMP_FIND,          VIRTKEY, CONTROL, NOINVERT
+    "D",            IDM_VIEW_DAY,           VIRTKEY, CONTROL, NOINVERT
+    "H",            IDM_VIEW_HALFYEAR,      VIRTKEY, CONTROL, NOINVERT
+    "I",            IDM_VIEW_INPUT,         VIRTKEY, CONTROL, NOINVERT
+    "1",            IDM_VIEW_MINIMIZE,      VIRTKEY, CONTROL, NOINVERT
+    "M",            IDM_VIEW_MONTH,         VIRTKEY, CONTROL, NOINVERT
+    "A",            IDM_VIEW_OPTION,        VIRTKEY, CONTROL, NOINVERT
+    "P",            IDM_VIEW_PRIVATE,       VIRTKEY, CONTROL, NOINVERT
+    "T",            IDM_VIEW_TODO,          VIRTKEY, CONTROL, NOINVERT
+    "W",            IDM_VIEW_WEEK,          VIRTKEY, CONTROL, NOINVERT
 END
 
 
@@ -246,17 +247,8 @@ BEGIN
     EDITTEXT        IDC_EXECNAME,6,11,91,12,ES_AUTOHSCROLL
     PUSHBUTTON      "参照(&B)",IDC_BROWSEEXEC,99,11,30,12
     GROUPBOX        "Oyajin Appd(appd.exe)の場所",IDC_STATIC,3,1,130,25,WS_GROUP
-    EDITTEXT        IDC_LEFTKEY_DEF,32,36,61,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_LEFTKEY_OPEN,32,49,91,12,ES_AUTOHSCROLL
-    LTEXT           "Today 左ｿﾌﾄｷｰ(※)",IDC_STATIC,5,27,65,8
-    LTEXT           "※設定後は再起動が必要です.\nW-ZERO3で左ｿﾌﾄｷｰを有効にするには\nKOTETU Battery Monitorが必要です.",IDC_STATIC,2,98,130,25
-    LTEXT           "表示:",IDC_STATIC,11,38,20,8
-    LTEXT           "場所:",IDC_STATIC,11,50,20,8
-    EDITTEXT        IDC_RIGHTKEY_DEF,32,72,61,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_RIGHTKEY_OPEN,32,85,91,12,ES_AUTOHSCROLL
-    LTEXT           "Today 右ｿﾌﾄｷｰ(※)",IDC_STATIC,5,63,65,8
-    LTEXT           "表示:",IDC_STATIC,11,74,20,8
-    LTEXT           "場所:",IDC_STATIC,11,86,20,8
+    LTEXT           "※MortScriptのｲﾝｽﾄｰﾙが必要です.",IDC_STATIC,7,50,123,8
+    CONTROL         "[拡張ﾒﾆｭｰ] を有効にする",IDC_ADDINMENU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,38,104,10
 END
 
 IDD_PROP_DEFAULTS DIALOG  0, 0, 130, 110
@@ -547,7 +539,7 @@ BEGIN
             MENUITEM "ｴｸｽﾎﾟｰﾄ(&E)...",              IDM_FILE_EXPORT
             MENUITEM "一括削除(&R)...",                 IDM_FILE_REMOVE
         END
-        POPUP "編集(&E)"
+        POPUP "編集"
         BEGIN
             MENUITEM "削除\tDel",                     IDM_EDIT_DELETE
             MENUITEM "元に戻す\tCtrl+Z",                IDM_EDIT_UNDO
@@ -556,7 +548,7 @@ BEGIN
             MENUITEM "ｺﾋﾟｰ\tCtrl+C",                IDM_EDIT_COPY
             MENUITEM "貼り付け\tCtrl+V",                IDM_EDIT_PASTE
         END
-        POPUP "移動(&J)"
+        POPUP "移動"
         BEGIN
             MENUITEM "検索...\tCtrl+F",               IDM_JUMP_FIND
             MENUITEM "日付...\tCtrl+J",               IDM_JUMP_DATE
@@ -571,6 +563,8 @@ BEGIN
     END
     POPUP "タップ＆ホールドメニュー"
     BEGIN
+        MENUITEM "編集\tCtrl+I",                  IDM_VIEW_INPUT
+        MENUITEM SEPARATOR
         MENUITEM "切り取り\tCtrl+X",                IDM_EDIT_CUT
         MENUITEM "ｺﾋﾟｰ\tCtrl+C",                IDM_EDIT_COPY
         MENUITEM "貼り付け\tCtrl+V",                IDM_EDIT_PASTE
